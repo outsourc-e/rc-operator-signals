@@ -1,0 +1,21 @@
+{
+  "name": "@outsourc-e/revenuecat-mcp",
+  "version": "0.2.0",
+  "description": "MCP server for RevenueCat charts and operator signals.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "revenuecat-mcp": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.17.4",
+    "@outsourc-e/revenuecat-charts": "workspace:*"
+  }
+}

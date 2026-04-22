@@ -1,0 +1,22 @@
+{
+  "name": "@outsourc-e/rc-brief",
+  "version": "0.2.0",
+  "description": "CLI for generating operator-grade RevenueCat briefs.",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "rc-brief": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format esm --dts",
+    "dev": "tsx src/index.ts",
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "@outsourc-e/revenuecat-charts": "workspace:*"
+  }
+}
