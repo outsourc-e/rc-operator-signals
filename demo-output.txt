@@ -1,0 +1,34 @@
+
+📊 RevenueCat Operator Signals — Dark Noise
+   2026-03-25 → 2026-04-22 (last 28 days)
+
+SNAPSHOT
+  Active Trials                                      68
+  Active Subscriptions                            2,534
+  MRR                                            $4,558
+  Revenue                                        $4,919
+  New Customers                                   1,401
+  Active Users                                   13,580
+  Number of transactions in the last 28 days          627
+
+SIGNALS
+  💡 Revenue exceeds MRR by 7.9% — non-recurring items in the mix
+     28-day revenue ($4,919) is higher than MRR ($4,558). Likely cause: one-time purchases, non-renewing subscriptions, or annual plan upfront recognition. Be careful — strong revenue here doesn't mean strong recurring base.
+     → Pull the Revenue chart segmented by product type to identify the non-recurring contributor.
+
+  💡 New customers are 55% of active subs in 28d — high acquisition velocity
+     1,401 new customers in 28 days against a paid base of 2,534. Either you're growing fast or the paid conversion rate from new → paid is below where it could be. Worth checking conversion-to-paying.
+     → Pull Conversion to Paying chart for the same window.
+
+  💡 Only 0.45 transactions per new customer in 28d
+     627 transactions against 1,401 new customers. Most new customers haven't transacted yet — they're free users. That's expected for freemium, but track conversion-to-paying carefully.
+
+WATCHLIST
+  💡 New customers are 55% of active subs in 28d — high acquisition velocity
+     1,401 new customers in 28 days against a paid base of 2,534. Either you're growing fast or the paid conversion rate from new → paid is below where it could be. Worth checking conversion-to-paying.
+
+CAVEATS
+  • Charts API data is regenerated from the current snapshot of receipts. Historical values can change when refunds or chargebacks happen.
+  • The current period is always incomplete — comparisons against the most recent bucket are provisional.
+  • Revenue includes one-time purchases and non-renewing subscriptions. It is not a pure proxy for subscription health.
+
