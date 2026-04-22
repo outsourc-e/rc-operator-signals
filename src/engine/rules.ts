@@ -171,15 +171,22 @@ export const ruleTransactionDensity: Rule = (cache) => {
   return [];
 };
 
+import { TIMESERIES_RULES } from './timeseries-rules.js';
+
 // =============================================================================
 // Rule registry
 // =============================================================================
 
-export const ALL_RULES: Rule[] = [
+export const OVERVIEW_RULES: Rule[] = [
   ruleRevenueMrrDivergence,
   ruleTrialFunnel,
   ruleAcquisitionToMonetization,
   ruleTransactionDensity,
+];
+
+export const ALL_RULES: Rule[] = [
+  ...OVERVIEW_RULES,
+  ...TIMESERIES_RULES,
 ];
 
 // =============================================================================
