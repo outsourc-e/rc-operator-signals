@@ -85,3 +85,22 @@ Hitting `/charts/{slug}/options` for 17 candidate slugs (revenue, mrr, active_su
 - Does the Charts API surface an "incomplete period" flag in the response, or is that dashboard-only?
 - What's the granularity range (daily/weekly/monthly)?
 - Are filters/segments universally available or chart-specific?
+
+---
+
+## Wed 2026-04-22 — V2 monorepo carve-out
+
+Completed the monorepo conversion to pnpm workspaces:
+- moved `web/` → `apps/dashboard/`
+- carved `src/api/client.ts` + `src/types/index.ts` into `packages/charts-sdk`
+- moved deterministic engine to `core/signals`
+- moved fixtures to `core/fixtures/dark-noise`
+- rebuilt CLI as `apps/cli`
+- added `packages/charts-mcp`
+- added `core/ai` with deterministic + OpenRouter providers
+- added nightly prerender workflow
+
+Judgment calls:
+- used canonical chart slug aliases in the SDK (`active_subscriptions` → `actives`, etc.) so the package is forgiving across RevenueCat naming conventions and the fixture slug set already in the repo
+- kept `core/signals` and `core/ai` as shared source modules, not separate published packages, to minimize workspace overhead and keep imports simple for the take-home
+- added `react-router-dom` to `apps/dashboard` because the parallel dashboard redesign already depended on it; this fixed the dashboard build without touching `App.tsx` or `styles.css`
