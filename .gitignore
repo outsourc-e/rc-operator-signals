@@ -5,3 +5,8 @@ dist/
 *.log
 .DS_Store
 api-snapshots/raw-*.json
+
+# Web app
+web/node_modules/
+web/dist/
+web/.vite/
