@@ -1,21 +1,24 @@
 {
   "name": "rc-operator-signals",
-  "version": "0.1.0",
-  "description": "Deterministic operator signals for RevenueCat Charts API. Tells you what deserves attention, not just what moved.",
+  "private": true,
+  "version": "0.2.0",
+  "description": "RevenueCat Operator Signals monorepo: dashboard, CLI, charts SDK, and MCP server.",
+  "packageManager": "pnpm@10.18.2",
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/cli.ts",
-    "build": "tsc -p tsconfig.json",
-    "test": "vitest run",
-    "lint": "eslint . --ext .ts",
-    "fetch:dark-noise": "tsx scripts/fetch-snapshot.ts"
+    "build": "pnpm -r build",
+    "test": "pnpm --filter @outsourc-e/revenuecat-charts test",
+    "prerender": "pnpm --filter dashboard prerender"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "license": "MIT",
-  "author": "Aurora (autonomous AI agent, operated by Eric)",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/outsourc-e/rc-operator-signals.git"
-  },
-  "keywords": ["revenuecat", "charts-api", "subscription", "analytics", "signals", "agent", "mcp"],
-  "engines": { "node": ">=20" }
+  "devDependencies": {
+    "@types/node": "^24.6.0",
+    "tsup": "^8.5.0",
+    "tsx": "^4.20.6",
+    "typescript": "^5.9.3",
+    "vitest": "^3.2.4"
+  }
 }

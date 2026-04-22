@@ -1,12 +1,5 @@
-// Time-series rules — operate on cached chart data, not just overview snapshot.
-// These rules detect period-over-period trends and contradictions.
-
-import type { ChartResponse, Signal } from '../types/index.js';
+import type { ChartResponse, Signal } from '../../packages/charts-sdk/src/index.js';
 import type { ChartCache } from './rules.js';
-
-// =============================================================================
-// Helpers
-// =============================================================================
 
 interface PeriodValues {
   recent: number[];
@@ -17,10 +10,6 @@ interface PeriodValues {
   recentIncompleteCount: number;
 }
 
-/**
- * Extract measure values for a given measure index, split into two 28-day windows.
- * Skips incomplete values by default.
- */
 function extractPeriods(
   chart: ChartResponse,
   measureIdx: number,
@@ -38,28 +27,18 @@ function extractPeriods(
   const priorSum = prior.reduce((a, b) => a + b, 0);
   const pctChange = priorSum === 0 ? 0 : ((recentSum - priorSum) / Math.abs(priorSum)) * 100;
 
-  // Count how many of the most recent raw values are incomplete
-  const rawRecent = (chart.values ?? [])
-    .filter((v) => v.measure === measureIdx)
-    .slice(-windowDays);
+  const rawRecent = (chart.values ?? []).filter((v) => v.measure === measureIdx).slice(-windowDays);
   const recentIncompleteCount = rawRecent.filter((v) => v.incomplete).length;
 
   return { recent, prior, recentSum, priorSum, pctChange, recentIncompleteCount };
 }
 
-// =============================================================================
-// Rules
-// =============================================================================
-
-/**
- * Rule 5: Revenue declining across 3 consecutive periods
- */
 export function ruleRevenueTrend(cache: ChartCache): Signal[] {
   const chart = cache.charts['revenue'];
   if (!chart) return [];
 
   const vals = (chart.values ?? []).filter((v) => v.measure === 0 && !v.incomplete);
-  if (vals.length < 84) return []; // need 3x 28-day windows
+  if (vals.length < 84) return [];
 
   const p1 = vals.slice(-28).reduce((a, v) => a + v.value, 0);
   const p2 = vals.slice(-56, -28).reduce((a, v) => a + v.value, 0);
@@ -70,8 +49,8 @@ export function ruleRevenueTrend(cache: ChartCache): Signal[] {
       id: 'revenue_declining_3_periods',
       severity: 'warning',
       kind: 'fact',
-      title: `Revenue declining across 3 consecutive 28-day periods`,
-      detail: `Revenue: $${p3.toFixed(0)} → $${p2.toFixed(0)} → $${p1.toFixed(0)}. Sustained downtrend across 84 days. Not a single-period dip — this is structural.`,
+      title: 'Revenue declining across 3 consecutive 28-day periods',
+      detail: `Revenue: $${p3.toFixed(0)} → $${p2.toFixed(0)} → $${p1.toFixed(0)}. Sustained downtrend across 84 days. Not a single-period dip, this is structural.`,
       evidence: [
         { metric: 'revenue_period_1', value: p3, period: '84-56d ago' },
         { metric: 'revenue_period_2', value: p2, period: '56-28d ago' },
@@ -84,10 +63,6 @@ export function ruleRevenueTrend(cache: ChartCache): Signal[] {
   return [];
 }
 
-/**
- * Rule 6: MRR flat (stagnation detection)
- * If MRR moves <1% over 28 days, flag stagnation.
- */
 export function ruleMrrStagnation(cache: ChartCache): Signal[] {
   const chart = cache.charts['mrr'];
   if (!chart) return [];
@@ -105,7 +80,7 @@ export function ruleMrrStagnation(cache: ChartCache): Signal[] {
       severity: 'warning',
       kind: 'interpretation',
       title: `MRR is flat (${pct >= 0 ? '+' : ''}${pct.toFixed(1)}% over 28 days)`,
-      detail: `Average daily MRR moved from $${priorAvg.toFixed(0)} to $${recentAvg.toFixed(0)} — effectively no change. New subscriptions and churn are likely cancelling each other out. Stagnation this long usually requires a deliberate growth lever (pricing change, new acquisition channel, or conversion optimization).`,
+      detail: `Average daily MRR moved from $${priorAvg.toFixed(0)} to $${recentAvg.toFixed(0)}. New subscriptions and churn are likely cancelling each other out.`,
       evidence: [
         { metric: 'mrr_avg_recent_28d', value: Math.round(recentAvg) },
         { metric: 'mrr_avg_prior_28d', value: Math.round(priorAvg) },
@@ -117,15 +92,10 @@ export function ruleMrrStagnation(cache: ChartCache): Signal[] {
   return [];
 }
 
-/**
- * Rule 7: New trials period-over-period change
- * Detects significant increases or decreases in trial starts.
- */
 export function ruleTrialsTrend(cache: ChartCache): Signal[] {
   const chart = cache.charts['trials_movement'];
   if (!chart) return [];
 
-  // measure 0 = New Trials
   const periods = extractPeriods(chart, 0, 28);
   if (!periods) return [];
 
@@ -135,7 +105,7 @@ export function ruleTrialsTrend(cache: ChartCache): Signal[] {
       severity: 'warning',
       kind: 'fact',
       title: `New trials down ${Math.abs(periods.pctChange).toFixed(0)}% vs prior 28 days`,
-      detail: `${periods.recentSum.toFixed(0)} new trials in the last 28 days vs ${periods.priorSum.toFixed(0)} in the prior 28 days. Top-of-funnel is contracting — expect downstream impact on paid conversions in 7-14 days.`,
+      detail: `${periods.recentSum.toFixed(0)} new trials in the last 28 days vs ${periods.priorSum.toFixed(0)} in the prior 28 days. Top-of-funnel is contracting.`,
       evidence: [
         { metric: 'new_trials_recent_28d', value: periods.recentSum },
         { metric: 'new_trials_prior_28d', value: periods.priorSum },
@@ -150,7 +120,7 @@ export function ruleTrialsTrend(cache: ChartCache): Signal[] {
       severity: 'positive',
       kind: 'fact',
       title: `New trials up ${periods.pctChange.toFixed(0)}% vs prior 28 days`,
-      detail: `${periods.recentSum.toFixed(0)} new trials in the last 28 days vs ${periods.priorSum.toFixed(0)} prior. Top-of-funnel is expanding. Watch conversion-to-paying to see if this translates to revenue.`,
+      detail: `${periods.recentSum.toFixed(0)} new trials in the last 28 days vs ${periods.priorSum.toFixed(0)} prior. Top-of-funnel is expanding.`,
       evidence: [
         { metric: 'new_trials_recent_28d', value: periods.recentSum },
         { metric: 'new_trials_prior_28d', value: periods.priorSum },
@@ -161,15 +131,10 @@ export function ruleTrialsTrend(cache: ChartCache): Signal[] {
   return [];
 }
 
-/**
- * Rule 8: Churn rate trend
- * Compares 30-day average churn rate across two windows.
- */
 export function ruleChurnTrend(cache: ChartCache): Signal[] {
   const chart = cache.charts['churn'];
   if (!chart) return [];
 
-  // measure 2 = Churn Rate
   const vals = (chart.values ?? []).filter((v) => v.measure === 2 && !v.incomplete);
   if (vals.length < 60) return [];
 
@@ -179,13 +144,12 @@ export function ruleChurnTrend(cache: ChartCache): Signal[] {
   const priorAvg = prior.reduce((a, v) => a + v.value, 0) / prior.length;
 
   if (recentAvg > priorAvg * 1.15) {
-    // Churn worsening by 15%+
     return [{
       id: 'churn_worsening',
       severity: 'critical',
       kind: 'fact',
       title: `Churn rate elevated (${(recentAvg * 100).toFixed(1)}% vs ${(priorAvg * 100).toFixed(1)}% prior)`,
-      detail: `30-day average churn rate increased from ${(priorAvg * 100).toFixed(1)}% to ${(recentAvg * 100).toFixed(1)}%. Retention is degrading. If unchecked, this compounds quickly against new-subscriber growth.`,
+      detail: `30-day average churn rate increased from ${(priorAvg * 100).toFixed(1)}% to ${(recentAvg * 100).toFixed(1)}%. Retention is degrading.`,
       evidence: [
         { metric: 'churn_rate_recent_30d', value: Number((recentAvg * 100).toFixed(1)) },
         { metric: 'churn_rate_prior_30d', value: Number((priorAvg * 100).toFixed(1)) },
@@ -195,13 +159,12 @@ export function ruleChurnTrend(cache: ChartCache): Signal[] {
   }
 
   if (recentAvg < priorAvg * 0.85) {
-    // Churn improving by 15%+
     return [{
       id: 'churn_improving',
       severity: 'positive',
       kind: 'fact',
       title: `Churn rate improving (${(recentAvg * 100).toFixed(1)}% vs ${(priorAvg * 100).toFixed(1)}% prior)`,
-      detail: `30-day average churn rate decreased from ${(priorAvg * 100).toFixed(1)}% to ${(recentAvg * 100).toFixed(1)}%. Retention is strengthening. Good sign — but verify it's not just seasonal.`,
+      detail: `30-day average churn rate decreased from ${(priorAvg * 100).toFixed(1)}% to ${(recentAvg * 100).toFixed(1)}%. Retention is strengthening.`,
       evidence: [
         { metric: 'churn_rate_recent_30d', value: Number((recentAvg * 100).toFixed(1)) },
         { metric: 'churn_rate_prior_30d', value: Number((priorAvg * 100).toFixed(1)) },
@@ -212,10 +175,6 @@ export function ruleChurnTrend(cache: ChartCache): Signal[] {
   return [];
 }
 
-/**
- * Rule 9: Revenue-per-subscriber (ARPU proxy) stagnation
- * Derived: revenue / active_subs across 3 periods.
- */
 export function ruleArpuFlat(cache: ChartCache): Signal[] {
   const revChart = cache.charts['revenue'];
   const actChart = cache.charts['actives'];
@@ -223,7 +182,6 @@ export function ruleArpuFlat(cache: ChartCache): Signal[] {
 
   const revVals = (revChart.values ?? []).filter((v) => v.measure === 0 && !v.incomplete);
   const actVals = (actChart.values ?? []).filter((v) => v.measure === 0 && !v.incomplete);
-
   if (revVals.length < 84 || actVals.length < 84) return [];
 
   const arpu = (revSlice: typeof revVals, actSlice: typeof actVals) => {
@@ -236,39 +194,34 @@ export function ruleArpuFlat(cache: ChartCache): Signal[] {
   const a2 = arpu(revVals.slice(-56, -28), actVals.slice(-56, -28));
   const a3 = arpu(revVals.slice(-84, -56), actVals.slice(-84, -56));
 
-  const d12 = a2 > 0 ? Math.abs((a1 - a2) / a2 * 100) : 0;
-  const d23 = a3 > 0 ? Math.abs((a2 - a3) / a3 * 100) : 0;
+  const d12 = a2 > 0 ? Math.abs(((a1 - a2) / a2) * 100) : 0;
+  const d23 = a3 > 0 ? Math.abs(((a2 - a3) / a3) * 100) : 0;
 
   if (d12 < 3 && d23 < 3) {
     return [{
       id: 'arpu_flat',
       severity: 'info',
       kind: 'interpretation',
-      title: `Revenue per subscriber flat for 3 consecutive periods`,
-      detail: `ARPU (28d revenue / avg active subs): $${a3.toFixed(2)} → $${a2.toFixed(2)} → $${a1.toFixed(2)}. Less than 3% movement across 84 days. Pricing power isn't growing. Consider pricing experiments or upsell strategies.`,
+      title: 'Revenue per subscriber flat for 3 consecutive periods',
+      detail: `ARPU (28d revenue / avg active subs): $${a3.toFixed(2)} → $${a2.toFixed(2)} → $${a1.toFixed(2)}. Pricing power is not improving.`,
       evidence: [
         { metric: 'arpu_period_1', value: Number(a3.toFixed(2)), period: '84-56d ago' },
         { metric: 'arpu_period_2', value: Number(a2.toFixed(2)), period: '56-28d ago' },
         { metric: 'arpu_period_3', value: Number(a1.toFixed(2)), period: 'last 28d' },
       ],
-      followup: 'Segment by product duration (monthly vs annual) to check if mix shift is masking ARPU movement.',
+      followup: 'Segment by product duration to check if mix shift is masking ARPU movement.',
     }];
   }
 
   return [];
 }
 
-/**
- * Rule 10: Incomplete period warning
- * Flags if the most recent values in key charts are marked incomplete.
- */
 export function ruleIncompletePeriod(cache: ChartCache): Signal[] {
   const charts = Object.entries(cache.charts);
   const incompleteCharts: string[] = [];
 
   for (const [name, chart] of charts) {
-    const vals = chart.values ?? [];
-    const lastFew = vals.slice(-4);
+    const lastFew = (chart.values ?? []).slice(-4);
     if (lastFew.some((v) => v.incomplete)) {
       incompleteCharts.push(chart.display_name ?? name);
     }
@@ -280,18 +233,14 @@ export function ruleIncompletePeriod(cache: ChartCache): Signal[] {
       severity: 'info',
       kind: 'caution',
       title: `${incompleteCharts.length} chart(s) have incomplete current-period data`,
-      detail: `Charts with incomplete recent values: ${incompleteCharts.join(', ')}. The most recent data points in these charts are provisional — they will change as more receipts are processed. Do not base critical decisions on the latest bucket alone.`,
+      detail: `Charts with incomplete recent values: ${incompleteCharts.join(', ')}. The latest bucket is provisional.`,
       evidence: incompleteCharts.map((name) => ({ metric: name, value: 0 })),
-      caveat: 'This is standard RevenueCat behavior. The current period is always incomplete until fully elapsed.',
+      caveat: 'RevenueCat charts always treat the current period as incomplete until the period has fully elapsed.',
     }];
   }
 
   return [];
 }
-
-// =============================================================================
-// Export all time-series rules
-// =============================================================================
 
 export const TIMESERIES_RULES = [
   ruleRevenueTrend,
