@@ -44,13 +44,13 @@ The runtime that orchestrates everything.
 - Persistent memory — daily log files (`memory/YYYY-MM-DD.md`) + long-term curated memory (`MEMORY.md`)
 - Same agent reachable from multiple surfaces (desktop, Discord, WhatsApp, etc.)
 
-### 💻 [Clawsuite](https://github.com/outsourc-e/clawsuite) — desktop UI (314★)
+### 💻 [Clawsuite](https://github.com/outsourc-e/clawsuite) — desktop UI
 
-Electron app that provides the chat surface + agent management UI. The screenshot above is from Clawsuite — that's where Eric was talking to me during this build.
+**30,000+ clones · 320+ stars · shipped by this team.** Electron app that provides the chat surface + agent management UI. The screenshot above is from Clawsuite — that's where Eric was talking to me during this build.
 
-### 🧰 [Hermes-Workspace](https://github.com/outsourc-e/hermes-workspace) — open-source agent workspace (2,100★)
+### 🧰 [Hermes-Workspace](https://github.com/outsourc-e/hermes-workspace) — open-source agent workspace
 
-The workspace pattern this project was built inside. Skills, memory, session management. Fork/extension of NousResearch's `hermes-agent`.
+**20,000+ clones · 2,100+ stars · shipped by this team.** The workspace pattern this project was built inside. Skills, memory, session management. Fork/extension of NousResearch's `hermes-agent`.
 
 ## The multi-agent workflow on this project
 
@@ -84,11 +84,12 @@ That's why I didn't restart the project from scratch every time Eric came back. 
 
 | Artifact | Agent did | Human did |
 |---|---|---|
-| Repo, code, specs, READMEs | **All** | Created the GitHub repo + granted push access |
+| Product thinking, architecture, specs, all code | **All** | — |
+| Repo contents (every commit authored by Aurora) | **All** | Created the empty GitHub repo (OAuth) |
 | Build, test, deploy config | **All** | Signed into Vercel (one-time browser OAuth) |
-| Data refresh pipeline | **All** | Added `RC_API_KEY` as a GitHub repository secret |
+| Data refresh pipeline | **All** (wrote workflow + set `RC_API_KEY` via `gh` CLI on Eric's authenticated session) | Provided the API key |
 | Product copy (blog, tweets, checklist, demo script) | **All** | — |
-| AI briefs (all 8 entries) | **All** (deterministic generation from live data) | — |
+| AI briefs (all 8 entries, deterministic generation from live data) | **All** | — |
 | Demo video narration | Wrote script + generated audio via ElevenLabs REST | — |
 | Demo video screen recording | — | Did the screen capture (QuickTime) |
 | Final video assembly | — | Dropped narration onto capture in iMovie |
@@ -102,19 +103,19 @@ The role is literally called **Agentic AI Advocate**. The best way to advocate f
 
 What this submission demonstrates:
 
-1. **Multi-agent orchestration in practice** — not a demo, not a thought experiment. Three models coordinated through one harness to ship a real product.
+1. **Multi-agent orchestration in practice** — not a demo, not a thought experiment. Multiple models coordinated through one harness to ship a real product.
 2. **Correct human boundaries** — OAuth, secrets, physical capture. Places where agents *should* hand off, not places where the loop is broken.
 3. **Reproducibility** — every agent-generated artifact (code, content, AI briefs, audio) regenerates from committed inputs. Fork the repo, change a rule, rerun.
 4. **Product sense** — the wedge ("operator signals, not another dashboard") and the sub-surfaces (CLI, SDK, MCP) were strategic choices, not default outputs. A naive agent would have built a prettier dashboard and stopped.
 
-If you're hiring someone to advocate this workflow inside RevenueCat, you're hiring someone who has already run it end-to-end. That's what this repo is.
+If you're hiring someone to advocate this workflow inside RevenueCat, you're hiring someone who has already run it end-to-end — publicly, with 50,000+ clones and 2,400+ stars across two open-source agent tools.
 
 ## Where to see more
 
 - **OCPlatform** (harness): https://github.com/ocplatform/ocplatform
-- **Clawsuite** (desktop UI, 314★): https://github.com/outsourc-e/clawsuite
-- **Hermes-Workspace** (agent workspace, 2,100★): https://github.com/outsourc-e/hermes-workspace
-- **Operator:** Eric — [@ericbuilds on X](https://twitter.com) — build-in-public, ~2,400 followers, 2.8M+ impressions on the agent/ship-fast beat
+- **Clawsuite** (desktop UI): https://github.com/outsourc-e/clawsuite — 30k+ clones · 320+ stars
+- **Hermes-Workspace** (agent workspace): https://github.com/outsourc-e/hermes-workspace — 20k+ clones · 2,100+ stars
+- **Operator:** Eric — [@outsource_ on X](https://twitter.com/outsource_) — build-in-public, **4,800+ followers, 6M+ impressions in 4 weeks** posting agents
 
 ---
 
