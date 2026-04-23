@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T04:56:23.188Z",
+  "generated_at": "2026-04-23T08:03:03.442Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -131,7 +131,7 @@
     {
       "id": "revenue",
       "name": "Revenue",
-      "value": 4950,
+      "value": 4990,
       "unit": "$",
       "period": "P28D",
       "delta": null,
@@ -169,7 +169,7 @@
     {
       "id": "new_customers",
       "name": "New Customers",
-      "value": 1368,
+      "value": 1364,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -207,7 +207,7 @@
     {
       "id": "active_users",
       "name": "Active Users",
-      "value": 13319,
+      "value": 13360,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -216,7 +216,7 @@
     {
       "id": "num_tx_last_28_days",
       "name": "Number of transactions in the last 28 days",
-      "value": 623,
+      "value": 622,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -1199,7 +1199,7 @@
     "movement": 9
   },
   "trial_funnel": {
-    "active_users": 13319,
+    "active_users": 13360,
     "new_trials_28d": 272,
     "active_trials": 54,
     "converted_estimated": 178
@@ -1213,8 +1213,8 @@
     "churn"
   ],
   "all_time": {
-    "revenue": 5071.27,
-    "transactions": 357,
+    "revenue": 5114.24,
+    "transactions": 360,
     "earliest_date": "2026-03-26"
   }
 }
