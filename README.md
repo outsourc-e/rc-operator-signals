@@ -215,3 +215,4 @@ The agent shipped all four deliverable options the take-home listed, plus an MCP
 ## License
 
 MIT. Use it, fork it, ship it.
+<!-- deploy-trigger: 2026-04-23T15:58:02.149104Z -->
