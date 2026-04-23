@@ -1,58 +1,58 @@
 {
   "overview": {
-    "text": "Dark Noise’s subscription base is essentially flat, with active subscriptions inching from 2,526 to 2,536 (+0.4%) and MRR holding at $4,562 (‑0.03%). Revenue is slipping for the third straight 28‑day window, down 0.9% to $4,919 and now 7.8% above MRR, indicating one‑off or annual purchases are masking a structural decline. The funnel shows healthy top‑of‑funnel growth (new trials +16% to 281) but poor conversion—only 0.45 transactions per new customer (627 transactions for 1,401 new users).",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:24.079Z",
+    "text": "Dark Noise's recurring base is MRR $4,570 against 28d revenue of $4,950 (revenue exceeds MRR by 8.3%, which usually means one-time or non-recurring receipts are in the mix). Active subs: 2,540. Active trials: 53. Top-of-funnel: 1,368 new customers in 28d at 0.46 transactions each — conversion density is thin.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "overall subscription business health"
   },
   "revenue": {
-    "text": "Revenue fell 0.9% over the last 28 days to $4,919, marking the third straight decline ( $5,148 → $4,984 → $4,939). The 28‑day revenue exceeds MRR by 7.8% ($4,919 vs $4,562), indicating a sizable non‑recurring component—likely one‑time purchases or annual upfront payments—driving cash above the stable recurring base.",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:28.000Z",
+    "text": "Revenue for the last 28 days is $4,950. That is 8.3% above MRR ($4,570), meaning roughly $380 of this period's receipts are non-recurring. Revenue can be misleading in isolation; MRR is the recurring story.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "revenue trends and non-recurring mix"
   },
   "mrr": {
-    "text": "MRR held steady at $4,562, a negligible -0.03% change, while daily average MRR slid from $4,540 to $4,539, indicating new subscriptions are being offset by churn. Subscription movement shows a net gain of only 7 accounts (2526 → 2536) despite 116 new sign‑ups and 16 reactivations, because 125 churned customers erased most of the inflow. This flat MRR amid minimal net growth signals a structural revenue decline that must be addressed.",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:34.619Z",
+    "text": "MRR sits at $4,570. Across the last 28 days the subscriber base moved from 2,531 to 2,540, a net change of +9, driven by 118 new and 16 reactivations against 125 churned. The two sides are approximately balancing, which is why MRR is moving slowly rather than compounding.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "MRR and subscription movement"
   },
   "churn": {
-    "text": "Churn remains a drag: 125 subscriptions left in the last 28 days, offset only by 116 new sign‑ups and 16 reactivations, yielding a net gain of just 7 active subs. MRR is essentially flat (−0.0% over the period) and revenue has slipped three periods in a row, indicating that retention is not improving despite a healthy inflow of new trials (up 16%).",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:38.868Z",
+    "text": "125 subscriptions churned in the last 28 days against 134 new + reactivations, yielding a net +9. Retention is the highest-leverage lever right now — at this scale each point of churn improvement directly lifts MRR.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "churn and retention trends"
   },
   "subscribers": {
-    "text": "The subscriber base grew marginally, rising from 2,526 to 2,536 active subscriptions (+7 net) despite 125 churned accounts, offset by 116 new sign‑ups and 16 reactivations. New customers now represent 55% of the total base (1,401 of 2,536), yet only 0.45 transactions per new customer (627 transactions) indicate low early monetization, while active trials have climbed 16% to 67, feeding the pipeline.",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:43.946Z",
-    "topic": "subscriber base composition and movement"
+    "text": "Paid base: 2,540 active subscriptions. New customers are 54% of the paid base (1,368 of 2,540) in the last 28 days — healthy acquisition, but the high ratio suggests conversion to paid is where money is being left. Transaction density: 0.46 transactions per new customer.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
+    "topic": "paid subscriber base"
   },
   "trials": {
-    "text": "Trial activation is up 16% (281 new trials vs 242 prior) but only 67 remain active, yielding an estimated 178 conversions out of 281 trials (≈63% conversion). However, with just 0.45 transactions per new customer (627 transactions/1,401 new customers) the funnel leaks heavily after trial, indicating most trialists are not monetizing beyond the free period. Immediate focus on post‑trial onboarding and pricing nudges is required to lift the low transaction rate.",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:14:49.497Z",
+    "text": "Top-of-funnel: 272 new trials in the last 28 days. Active trials right now: 53. Funnel estimate: ~178 trial conversions this period from 272 new trials. Watch trial-to-paid conversion over the next 7–14 days — that is the leading indicator for next period's MRR.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "trial funnel and conversion"
-  },
-  "brief": {
-    "text": "Active trials rose 16% to 67, but conversion remains low—only 0.45 transactions per new customer and an estimated 178 of 281 new trials have yet to convert. Revenue slipped 0.9% to $4,919 and has declined three periods in a row, while MRR is flat, indicating new sign‑ups are being offset by churn (125 lost vs 116 new). The paid base grew marginally (+7) despite churn, suggesting acquisition is outpacing retention but not driving recurring growth. Immediate action: launch a targeted in‑app upsell/retention flow for trial users and recent sign‑ups to boost conversion and stem the revenue downtrend.",
-    "source": "ai",
-    "model": "openai/gpt-oss-120b:free",
-    "generated_at": "2026-04-23T00:15:01.324Z",
-    "topic": "executive summary of the period"
   },
   "signals": {
     "text": "The engine fired 3 signals against Dark Noise's live 28-day window. Revenue exceeds MRR by 8.3%; New customers are 54% of active subs in 28d; Only 0.46 transactions per new customer in 28d. Together these show where the engine thinks attention is warranted right now — strong signals get a follow-up action; info-level signals surface context rather than alarm. Watchlist flags that some charts still have incomplete current-period data, so do not over-trust the newest bucket.",
     "source": "rules",
     "model": null,
-    "generated_at": "2026-04-23T03:18:20.591Z",
+    "generated_at": "2026-04-23T03:26:13.881Z",
     "topic": "signal engine output this period"
+  },
+  "brief": {
+    "text": "Dark Noise over the last 28 days: MRR $4,570, revenue $4,950, 2,540 active subs, 53 active trials. Top signal: Revenue exceeds MRR by 8.3%. Next action: audit what changed in the product or marketing 3–4 weeks ago — that is where the current trends were seeded.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:26:13.881Z",
+    "topic": "executive summary of the period"
   }
 }

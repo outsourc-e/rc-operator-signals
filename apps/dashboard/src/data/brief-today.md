@@ -1,7 +1,7 @@
 # RevenueCat Operator Brief — Dark Noise
 
 > Period: 2026-03-26 → 2026-04-23
-> Generated: 2026-04-23T03:18:20.591Z
+> Generated: 2026-04-23T03:26:13.881Z
 
 Dark Noise operator brief — 28d: MRR $4,570, revenue $4,950. Top signal: Revenue exceeds MRR by 8.3%. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
 

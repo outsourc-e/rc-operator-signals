@@ -183,32 +183,86 @@ const dashboardData = {
 
 writeFileSync('./src/data/dashboard.json', JSON.stringify(dashboardData, null, 2));
 
-// Refresh the deterministic `signals` entry in ai-briefs.json so the Signals
-// page stays in sync with the fired signals on every data refresh.
+// ---------------------------------------------------------------------------
+// Rebuild ai-briefs.json from live numbers on every refresh.
+//
+// These are deterministic briefs (source: 'rules') grounded in the current
+// dashboard + brief state. No LLM call, no drift, no API key required, and
+// the text always matches the numbers the user sees.
+// ---------------------------------------------------------------------------
 try {
   const briefsPath = './src/data/ai-briefs.json';
-  const briefs = JSON.parse(readFileSync(briefsPath, 'utf8'));
   const b = briefOutput.brief;
-  const sigs = b?.signals ?? [];
-  const wl = b?.watchlist ?? [];
-  const titles = sigs.map((s) => s.title);
-  const count = sigs.length;
-  const wlNote = wl.some((s) => s.id === 'incomplete_period_active')
+  const generated = b?.generated_at ?? new Date().toISOString();
+
+  const kpi = (id) => dashboardData.kpis.find((k) => k.id === id);
+  const fmtUsd = (n) => `$${Math.round(n).toLocaleString()}`;
+  const fmtPct = (n) => `${n > 0 ? '+' : ''}${n.toFixed(1)}%`;
+
+  const mrr = kpi('mrr');
+  const rev = kpi('revenue');
+  const subs = kpi('active_subscriptions');
+  const trials = kpi('active_trials');
+  const newCust = kpi('new_customers');
+  const tx = kpi('num_tx_last_28_days');
+
+  const mov = dashboardData.subscription_movement;
+  const funnel = dashboardData.trial_funnel;
+
+  // Movement sometimes comes back without a proper starting value (level
+  // deltas). Recompute from new/reactivation/churn so the text stays honest.
+  const movEnding = mov?.ending ?? subs?.value ?? 0;
+  const movNetChange = (mov?.new ?? 0) + (mov?.reactivation ?? 0) - Math.abs(mov?.churned ?? 0);
+  const movStarting = movEnding - movNetChange;
+  const movGainers = (mov?.new ?? 0) + (mov?.reactivation ?? 0);
+
+  const revVsMrrPct = mrr?.value ? ((rev?.value - mrr?.value) / mrr.value) * 100 : 0;
+  const txPerNew = newCust?.value ? tx?.value / newCust.value : 0;
+  const newCustPct = subs?.value ? (newCust?.value / subs.value) * 100 : 0;
+  const trialsChange = trials?.delta?.pct ?? 0;
+  const trialsPriorSum = trials?.delta?.prior ?? 0;
+  // `new_trials_28d` is the count of trials started in the last 28 days.
+  // Active trials (trials?.value) is the current snapshot, not a 28d count.
+  const newTrials28d = funnel?.new_trials_28d ?? 0;
+
+  const overview = `${projectName}'s recurring base is MRR ${fmtUsd(mrr?.value ?? 0)} against 28d revenue of ${fmtUsd(rev?.value ?? 0)} (${revVsMrrPct > 0 ? 'revenue exceeds MRR' : 'MRR exceeds revenue'} by ${Math.abs(revVsMrrPct).toFixed(1)}%, which usually means one-time or non-recurring receipts are in the mix). Active subs: ${(subs?.value ?? 0).toLocaleString()}. Active trials: ${trials?.value ?? 0}. Top-of-funnel: ${(newCust?.value ?? 0).toLocaleString()} new customers in 28d at ${txPerNew.toFixed(2)} transactions each — ${txPerNew < 0.5 ? 'conversion density is thin' : 'conversion density is healthy'}.`;
+
+  const revenue = `Revenue for the last 28 days is ${fmtUsd(rev?.value ?? 0)}. That is ${revVsMrrPct > 5 ? `${revVsMrrPct.toFixed(1)}% above MRR (${fmtUsd(mrr?.value ?? 0)}), meaning roughly ${fmtUsd((rev?.value ?? 0) - (mrr?.value ?? 0))} of this period's receipts are non-recurring` : `within ${Math.abs(revVsMrrPct).toFixed(1)}% of MRR, so the mix is mostly recurring`}. Revenue can be misleading in isolation; MRR is the recurring story.`;
+
+  const mrrBrief = `MRR sits at ${fmtUsd(mrr?.value ?? 0)}. Across the last 28 days the subscriber base moved from ${movStarting.toLocaleString()} to ${movEnding.toLocaleString()}, a net change of ${movNetChange >= 0 ? '+' : ''}${movNetChange}, driven by ${mov?.new ?? 0} new and ${mov?.reactivation ?? 0} reactivations against ${Math.abs(mov?.churned ?? 0)} churned. The two sides are approximately balancing, which is why MRR is moving slowly rather than compounding.`;
+
+  const churn = `${Math.abs(mov?.churned ?? 0)} subscriptions churned in the last 28 days against ${movGainers} new + reactivations, yielding a net ${movNetChange >= 0 ? '+' : ''}${movNetChange}. Retention is the highest-leverage lever right now — at this scale each point of churn improvement directly lifts MRR.`;
+
+  const subscribers = `Paid base: ${(subs?.value ?? 0).toLocaleString()} active subscriptions. New customers are ${newCustPct.toFixed(0)}% of the paid base (${(newCust?.value ?? 0).toLocaleString()} of ${(subs?.value ?? 0).toLocaleString()}) in the last 28 days — ${newCustPct > 30 ? 'healthy acquisition, but the high ratio suggests conversion to paid is where money is being left' : 'balanced acquisition-to-base ratio'}. Transaction density: ${txPerNew.toFixed(2)} transactions per new customer.`;
+
+  const trialsBrief = `Top-of-funnel: ${newTrials28d.toLocaleString()} new trials in the last 28 days${trialsPriorSum > 0 ? ` vs ${trialsPriorSum.toLocaleString()} prior (${fmtPct(trialsChange)})` : ''}. Active trials right now: ${trials?.value ?? 0}. Funnel estimate: ~${funnel?.converted_estimated ?? 0} trial conversions this period from ${newTrials28d} new trials. Watch trial-to-paid conversion over the next 7–14 days — that is the leading indicator for next period's MRR.`;
+
+  const sigsList = b?.signals ?? [];
+  const wlList = b?.watchlist ?? [];
+  const sigTitles = sigsList.map((s) => s.title);
+  const wlNote = wlList.some((s) => s.id === 'incomplete_period_active')
     ? ' Watchlist flags that some charts still have incomplete current-period data, so do not over-trust the newest bucket.'
     : '';
-  const text = count === 0
+  const signals = sigsList.length === 0
     ? `The engine evaluated all 10 rules against ${projectName}'s live 28-day window and none of them tripped. The business is healthy on every dimension the engine checks — revenue, MRR, churn, trial velocity, ARPU, and transaction density.${wlNote}`
-    : `The engine fired ${count} signal${count === 1 ? '' : 's'} against ${projectName}'s live 28-day window. ${titles.join('; ')}. Together these show where the engine thinks attention is warranted right now — strong signals get a follow-up action; info-level signals surface context rather than alarm.${wlNote}`;
-  briefs.signals = {
-    text: text.trim(),
-    source: 'rules',
-    model: null,
-    generated_at: b?.generated_at ?? new Date().toISOString(),
-    topic: 'signal engine output this period',
+    : `The engine fired ${sigsList.length} signal${sigsList.length === 1 ? '' : 's'} against ${projectName}'s live 28-day window. ${sigTitles.join('; ')}. Together these show where the engine thinks attention is warranted right now — strong signals get a follow-up action; info-level signals surface context rather than alarm.${wlNote}`;
+
+  const exec = `${projectName} over the last 28 days: MRR ${fmtUsd(mrr?.value ?? 0)}, revenue ${fmtUsd(rev?.value ?? 0)}, ${(subs?.value ?? 0).toLocaleString()} active subs, ${trials?.value ?? 0} active trials. ${sigsList.length > 0 ? `Top signal: ${sigsList[0].title}.` : 'No signals fired — the business is healthy on the dimensions the engine checks.'} Next action: audit what changed in the product or marketing 3–4 weeks ago — that is where the current trends were seeded.`;
+
+  const briefs = {
+    overview: { text: overview, source: 'rules', model: null, generated_at: generated, topic: 'overall subscription business health' },
+    revenue: { text: revenue, source: 'rules', model: null, generated_at: generated, topic: 'revenue trends and non-recurring mix' },
+    mrr: { text: mrrBrief, source: 'rules', model: null, generated_at: generated, topic: 'MRR and subscription movement' },
+    churn: { text: churn, source: 'rules', model: null, generated_at: generated, topic: 'churn and retention trends' },
+    subscribers: { text: subscribers, source: 'rules', model: null, generated_at: generated, topic: 'paid subscriber base' },
+    trials: { text: trialsBrief, source: 'rules', model: null, generated_at: generated, topic: 'trial funnel and conversion' },
+    signals: { text: signals, source: 'rules', model: null, generated_at: generated, topic: 'signal engine output this period' },
+    brief: { text: exec, source: 'rules', model: null, generated_at: generated, topic: 'executive summary of the period' },
   };
+
   writeFileSync(briefsPath, JSON.stringify(briefs, null, 2));
 } catch (err) {
-  console.warn('Could not update ai-briefs.signals:', err?.message ?? err);
+  console.warn('Could not rebuild ai-briefs.json:', err?.message ?? err);
 }
 
 console.log(`Pre-rendered dashboard.json, brief.json, brief-today.md (mode=${liveMode ? 'live' : 'demo'})`);

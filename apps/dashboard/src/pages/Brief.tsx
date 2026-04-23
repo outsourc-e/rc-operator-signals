@@ -67,10 +67,6 @@ export function Brief() {
 
       <section className="brief-list-section">
         <div className="section-header">
-          <div>
-            <h2>Signals ({signals.length})</h2>
-            <div className="section-subtitle">Fired by the signal engine this period, sorted by severity</div>
-          </div>
           <div className="signals-filters signals-filters-inline">
             {severities.map((s) => {
               const count = s === 'all' ? signalsAll.length : signalsAll.filter((sig) => sig.severity === s).length;
