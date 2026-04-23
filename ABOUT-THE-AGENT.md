@@ -20,7 +20,7 @@ This doc exists because reviewers grading autonomy shouldn't have to trust a nar
 
 Aurora runs **OpenClaw + Hermes Agent** as a unified dual-platform stack — SSH into two home PCs with local model fleets, spawns sub-agents for parallel coding, scans Polymarket every 30 minutes, drafts X content, triages GitHub issues, and runs Discord community bots. The RevenueCat take-home is one project inside that operating footprint.
 
-These numbers are pulled from the local session logs on this machine, not the older DiscoverHermes submission snapshot.
+These numbers are pulled from the surviving local session logs on this machine, not the older DiscoverHermes submission snapshot. The current local log history starts on 2026-02-18, so if earlier session archives were cleared, treat this as a lower bound rather than lifetime total.
 
 | Metric | Value | Source |
 |---|---|---|
@@ -71,7 +71,7 @@ The runtime that orchestrates everything.
 
 ### 🧰 [Hermes-Workspace](https://github.com/outsourc-e/hermes-workspace) — open-source agent workspace
 
-**20,000+ clones · 2,160★ · 247 forks · shipped by this team.** The workspace pattern this project was built inside. Skills, memory, session management. Fork/extension of NousResearch's `hermes-agent`.
+**20,000+ clones · 2,161★ · 248 forks · shipped by this team.** The workspace pattern this project was built inside. Skills, memory, session management. Fork/extension of NousResearch's `hermes-agent`.
 
 ## The multi-agent workflow on this project
 
@@ -129,13 +129,13 @@ What this submission demonstrates:
 3. **Reproducibility** — every agent-generated artifact (code, content, AI briefs, audio) regenerates from committed inputs. Fork the repo, change a rule, rerun.
 4. **Product sense** — the wedge ("operator signals, not another dashboard") and the sub-surfaces (CLI, SDK, MCP) were strategic choices, not default outputs. A naive agent would have built a prettier dashboard and stopped.
 
-If you're hiring someone to advocate this workflow inside RevenueCat, you're hiring someone who has already run it end-to-end — publicly, with 50,000+ clones and 2,480+ stars across two open-source agent tools.
+If you're hiring someone to advocate this workflow inside RevenueCat, you're hiring someone who has already run it end-to-end — publicly, with 50,000+ clones and 2,483+ stars across two open-source agent tools.
 
 ## Where to see more
 
-- **OpenClaw** (harness)
+- **OpenClaw** (harness): https://openclaw.ai · https://github.com/outsourc-e/openclaw
 - **Clawsuite** (desktop UI): https://github.com/outsourc-e/clawsuite — 30k+ clones · 322★ · 51 forks
-- **Hermes-Workspace** (agent workspace): https://github.com/outsourc-e/hermes-workspace — 20k+ clones · 2,160★ · 247 forks
+- **Hermes-Workspace** (agent workspace): https://github.com/outsourc-e/hermes-workspace — 20k+ clones · 2,161★ · 248 forks
 - **Operator:** Eric — [@outsource_ on X](https://twitter.com/outsource_) — build-in-public, **4,800+ followers, 6M+ impressions in 4 weeks** posting agents
 
 ---

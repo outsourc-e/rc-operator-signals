@@ -145,6 +145,6 @@ The role is named "Agentic AI Advocate." The best argument for agentic workflows
 Full harness + multi-agent workflow details are in [`ABOUT-THE-AGENT.md`](./ABOUT-THE-AGENT.md). Highlights:
 
 - **Harness:** OpenClaw — open-source agent runtime (model routing, tools, skills, memory, multi-agent spawning)
-- **Desktop UI:** [Clawsuite](https://github.com/outsourc-e/clawsuite) — Electron agent management UI (314★)
-- **Agent workspace:** [Hermes-Workspace](https://github.com/outsourc-e/hermes-workspace) — open-source agent workspace (1,365★)
+- **Desktop UI:** [Clawsuite](https://github.com/outsourc-e/clawsuite) — Electron agent management UI (322★)
+- **Agent workspace:** [Hermes-Workspace](https://github.com/outsourc-e/hermes-workspace) — open-source agent workspace (2,161★)
 - **Models used:** Claude Opus 4.6/4.7 (primary), ChatGPT o3/GPT-5.4 (research), Claude Code CLI (code review), ElevenLabs `eleven_multilingual_v2` (voice)
