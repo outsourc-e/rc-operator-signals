@@ -22,7 +22,7 @@ The repo also ships:
 ## 2. Long-form blog post
 
 - **Source:** [`content/blog-post.md`](./content/blog-post.md) — 2,418 words
-- **Published:** _[X long-form post URL — to be pasted after publish]_
+- **Published:** https://x.com/outsource_/status/2047331442061963717
 
 Covers the product thesis ("dashboards show what moved, Operator Signals shows what deserves attention"), the build, the four surfaces, what the agent got right and where it got stuck, the agent stack itself (multi-agent research + critique loop), and the roadmap.
 
