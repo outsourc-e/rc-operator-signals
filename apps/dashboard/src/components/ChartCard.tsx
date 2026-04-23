@@ -34,6 +34,11 @@ export function ChartCard({ title, subtitle, series, kind, color = '#0e78a6', he
   const data = series.map((p) => ({ ...p, label: shortDate(String(p.date)) }));
   const gradId = `fill-${title.replace(/\s+/g, '-').toLowerCase()}`;
 
+  // Line and area charts: zoom to data range so flat metrics aren't invisible
+  const yDomain: [string, string] | undefined = (kind === 'line' || kind === 'area')
+    ? ['dataMin - 5%', 'dataMax + 5%']
+    : undefined;
+
   return (
     <article className="chart-card">
       <div className="chart-card-header">
@@ -55,7 +60,7 @@ export function ChartCard({ title, subtitle, series, kind, color = '#0e78a6', he
               </defs>
               <CartesianGrid stroke="#eef0f3" vertical={false} />
               <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} minTickGap={28} />
-              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={44} />
+              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={56} domain={yDomain} tickFormatter={(v) => typeof v === 'number' ? Math.round(v).toLocaleString() : v} />
               <Tooltip content={<ChartTooltip />} />
               <Area type="monotone" dataKey="value" stroke={color} fill={`url(#${gradId})`} strokeWidth={2.5} />
             </AreaChart>
@@ -63,7 +68,7 @@ export function ChartCard({ title, subtitle, series, kind, color = '#0e78a6', he
             <LineChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
               <CartesianGrid stroke="#eef0f3" vertical={false} />
               <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} minTickGap={28} />
-              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={44} />
+              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={56} domain={yDomain} tickFormatter={(v) => typeof v === 'number' ? Math.round(v).toLocaleString() : v} />
               <Tooltip content={<ChartTooltip />} />
               <Line type="monotone" dataKey="value" stroke={color} strokeWidth={2.5} dot={false} />
             </LineChart>
@@ -71,19 +76,19 @@ export function ChartCard({ title, subtitle, series, kind, color = '#0e78a6', he
             <BarChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
               <CartesianGrid stroke="#eef0f3" vertical={false} />
               <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} minTickGap={28} />
-              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={44} />
+              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={56} tickFormatter={(v) => typeof v === 'number' ? Math.round(v).toLocaleString() : v} />
               <Tooltip content={<ChartTooltip />} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
               <ReferenceLine y={0} stroke="#cbd5e1" />
               <Bar dataKey="New Trials" fill="#0e78a6" radius={[4, 4, 0, 0]} />
               <Bar dataKey="Expired Trials" fill="#00d5bf" radius={[4, 4, 0, 0]} />
-              <Bar dataKey="Movement" fill="#F4813F" radius={[4, 4, 0, 0]} />
+              <Bar dataKey="Movement" fill="#EE5A60" radius={[4, 4, 0, 0]} />
             </BarChart>
           ) : (
             <ComposedChart data={data} margin={{ top: 8, right: 12, left: 0, bottom: 0 }}>
               <CartesianGrid stroke="#eef0f3" vertical={false} />
               <XAxis dataKey="label" tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} minTickGap={28} />
-              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={44} />
+              <YAxis tick={{ fontSize: 11, fill: '#94a3b8' }} tickLine={false} axisLine={false} width={56} tickFormatter={(v) => typeof v === 'number' ? Math.round(v).toLocaleString() : v} />
               <Tooltip content={<ChartTooltip />} />
               <Legend wrapperStyle={{ fontSize: 11 }} />
               <ReferenceLine y={0} stroke="#cbd5e1" />

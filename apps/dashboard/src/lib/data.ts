@@ -98,12 +98,22 @@ export function findKpi(id: string): KPI | undefined {
   return dashboard.kpis.find((kpi) => kpi.id === id);
 }
 
+// Dedupe signals by title (rule engine can fire the same insight from different rule paths)
+function dedupeByTitle(signals: Signal[]): Signal[] {
+  const seen = new Set<string>();
+  return signals.filter((s) => {
+    if (seen.has(s.title)) return false;
+    seen.add(s.title);
+    return true;
+  });
+}
+
 export function topSignals(limit = 3): Signal[] {
-  return [...new Map([...brief.signals, ...brief.contradictions].map((s) => [s.id, s])).values()].slice(0, limit);
+  return dedupeByTitle([...brief.signals, ...brief.contradictions]).slice(0, limit);
 }
 
 export function allSignals(): Signal[] {
-  return [...new Map([...brief.signals, ...brief.contradictions].map((s) => [s.id, s])).values()];
+  return dedupeByTitle([...brief.signals, ...brief.contradictions]);
 }
 
 export function watchlist(): Signal[] {

@@ -1,20 +1,30 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
+import { Sparkles } from 'lucide-react';
 import { AiSummary } from '../components/AiSummary';
-import { SignalCard } from '../components/SignalCard';
+import { Breadcrumbs } from '../components/Breadcrumbs';
+import { ExportMenu } from '../components/ExportMenu';
 import { allSignals, brief, dashboard, watchlist } from '../lib/data';
+import type { Severity } from '../lib/data';
+import { formatNumber } from '../lib/format';
 import { buildMarkdown, buildSlack } from '../lib/markdown';
+import { useAiBrief } from '../hooks/useAiBrief';
+
+const DEFAULT_BRIEF = `Dark Noise: improving quality, fragile top. MRR flat, churn improving fast (23.7% → 18.7%), trials up 16%. Revenue drifting slightly — watch for non-recurring mix. Next action: audit what changed in the product or marketing 3-4 weeks ago, since that's when the churn improvement was seeded. Don't change anything that worked.`;
+
+const severities: Array<Severity | 'all'> = ['all', 'critical', 'warning', 'info', 'positive'];
 
 export function Brief() {
-  const [copied, setCopied] = useState<string | null>(null);
-  const signals = allSignals();
+  const { text, source } = useAiBrief({ id: 'brief', fallback: DEFAULT_BRIEF });
+  const [filter, setFilter] = useState<Severity | 'all'>('all');
+  const signalsAll = allSignals();
+  const signals = useMemo(
+    () => filter === 'all' ? signalsAll : signalsAll.filter((s) => s.severity === filter),
+    [signalsAll, filter],
+  );
   const watch = watchlist();
 
-  const aiText = `Dark Noise: improving quality, fragile top. MRR flat, churn improving fast (23.7% → 18.7%), trials up 16%. Revenue drifting slightly — watch for non-recurring mix. Next action: audit what changed in the product or marketing 3–4 weeks ago, since that's when the churn improvement was seeded. Don't change anything that worked.`;
-
-  const copy = async (text: string, label: string) => {
-    await navigator.clipboard.writeText(text);
-    setCopied(label);
-    window.setTimeout(() => setCopied(null), 1400);
+  const copy = async (t: string) => {
+    await navigator.clipboard.writeText(t);
   };
 
   const download = () => {
@@ -29,44 +39,104 @@ export function Brief() {
 
   return (
     <div className="page">
+            <Breadcrumbs crumbs={[
+        { label: 'RevenueCat', to: '/' },
+        { label: 'Intelligence', to: '/' },
+        { label: 'AI operator brief' },
+      ]} />
       <div className="page-header">
         <div>
-          <h1>Today's AI operator brief</h1>
+          <h1>AI operator brief</h1>
           <p className="page-subtitle">
-            {dashboard.period.start} → {dashboard.period.end}. Auto-generated daily, agent-disclosed.
+            {dashboard.period.start} → {dashboard.period.end}. Regenerates on every data refresh.
           </p>
         </div>
         <div className="page-actions">
-          <button className="btn" onClick={() => copy(buildSlack(), 'slack')}>{copied === 'slack' ? 'Copied' : 'Copy Slack brief'}</button>
-          <button className="btn" onClick={() => copy(buildMarkdown(), 'md')}>{copied === 'md' ? 'Copied' : 'Copy Markdown'}</button>
-          <button className="btn btn-primary" onClick={download}>Download brief.md</button>
+          <span className="brief-ai-tag">
+            <Sparkles size={12} /> AI-generated
+          </span>
+          <ExportMenu
+            onCopySlack={() => copy(buildSlack())}
+            onCopyMarkdown={() => copy(buildMarkdown())}
+            onDownload={download}
+          />
         </div>
       </div>
 
-      <AiSummary title="TL;DR" text={aiText} source="rules" />
+      <AiSummary title="TL;DR" text={text} source={source} />
 
-      <section className="signals-section">
+      <section className="brief-list-section">
         <div className="section-header">
           <div>
-            <h2>All signals ({signals.length})</h2>
-            <div className="section-subtitle">Fired by the deterministic signal engine this period</div>
+            <h2>Signals ({signals.length})</h2>
+            <div className="section-subtitle">Fired by the signal engine this period, sorted by severity</div>
+          </div>
+          <div className="signals-filters signals-filters-inline">
+            {severities.map((s) => {
+              const count = s === 'all' ? signalsAll.length : signalsAll.filter((sig) => sig.severity === s).length;
+              return (
+                <button
+                  key={s}
+                  className={`filter-btn ${filter === s ? 'active' : ''}`}
+                  onClick={() => setFilter(s)}
+                >
+                  {s === 'all' ? 'All' : s.charAt(0).toUpperCase() + s.slice(1)}
+                  <span className="filter-count">{count}</span>
+                </button>
+              );
+            })}
           </div>
         </div>
-        <div className="signals-grid">
-          {signals.map((s) => <SignalCard key={s.id} signal={s} />)}
+        <div className="brief-list">
+          {signals.map((s) => (
+            <article key={s.id} className="brief-item">
+              <div className="brief-item-left">
+                <span className={`severity-pill ${s.severity}`}>{s.severity}</span>
+              </div>
+              <div className="brief-item-body">
+                <div className="brief-item-title">{s.title}</div>
+                <div className="brief-item-detail">{s.detail}</div>
+                {s.evidence?.length > 0 && (
+                  <div className="brief-item-evidence">
+                    {s.evidence.map((e, i) => (
+                      <span key={`${s.id}-${i}`} className="evidence-chip">
+                        {e.metric}: {formatNumber(e.value)}{e.period ? ` · ${e.period}` : ''}
+                      </span>
+                    ))}
+                  </div>
+                )}
+              </div>
+              {s.followup && (
+                <div className="brief-item-followup">
+                  <span className="brief-item-followup-label">Next action</span>
+                  <span className="brief-item-followup-text">{s.followup}</span>
+                </div>
+              )}
+            </article>
+          ))}
         </div>
       </section>
 
       {watch.length > 0 && (
-        <section className="signals-section">
+        <section className="brief-list-section">
           <div className="section-header">
             <div>
               <h2>Watchlist</h2>
               <div className="section-subtitle">Monitor before acting</div>
             </div>
           </div>
-          <div className="signals-grid">
-            {watch.map((s) => <SignalCard key={s.id} signal={s} compact />)}
+          <div className="brief-list">
+            {watch.map((s) => (
+              <article key={s.id} className="brief-item brief-item-compact">
+                <div className="brief-item-left">
+                  <span className={`severity-pill ${s.severity}`}>{s.severity}</span>
+                </div>
+                <div className="brief-item-body">
+                  <div className="brief-item-title">{s.title}</div>
+                  <div className="brief-item-detail">{s.detail}</div>
+                </div>
+              </article>
+            ))}
           </div>
         </section>
       )}

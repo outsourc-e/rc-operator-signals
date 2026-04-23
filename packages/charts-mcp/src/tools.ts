@@ -1,5 +1,19 @@
 import { RevenueCatCharts, type ChartResponse } from '@outsourc-e/revenuecat-charts';
-import { narrate } from '../../../core/ai/index.js';
+// Deterministic narrative inline (no LLM dependency)
+function narrate(signals: any[], snapshot: any[], period: string, projectName: string): string {
+  const mrr = snapshot.find((m) => String(m.id) === 'mrr');
+  const rev = snapshot.find((m) => String(m.id) === 'revenue');
+  const churn = snapshot.find((m) => String(m.id) === 'churn_rate');
+  const critical = signals.filter((s) => s.severity === 'critical');
+  const positive = signals.filter((s) => s.severity === 'positive');
+  const lines = [`${projectName} operator brief — ${period}:`];
+  if (mrr) lines.push(`MRR $${mrr.value.toLocaleString()}, revenue $${rev?.value?.toLocaleString() ?? '?'}, churn ${churn?.value?.toFixed(1) ?? '?'}%.`);
+  if (positive.length > 0) lines.push(`${positive.length} positive signal${positive.length > 1 ? 's' : ''}: ${positive[0].title}.`);
+  if (critical.length > 0) lines.push(`Critical attention: ${critical[0].title} — ${critical[0].detail}`);
+  else if (signals.length > 0) lines.push(`Top signal: ${signals[0].title}`);
+  lines.push('Next: audit what changed 3-4 weeks ago.');
+  return lines.join(' ');
+}
 import { buildBrief, explainSignal, type ChartCache } from '../../../core/signals/index.js';
 
 const REQUIRED_CHARTS = ['revenue', 'mrr', 'actives', 'actives_movement', 'trials_movement', 'churn'] as const;
@@ -61,10 +75,7 @@ export async function detectSignals(period: PeriodFlag = '28d'): Promise<string>
 export async function weeklyBrief(period: PeriodFlag = '28d'): Promise<string> {
   const cache = await loadChartCache(period);
   const brief = buildBrief(cache, { project_name: 'RevenueCat Project', period: dateRange(period) });
-  const narrative = await narrate(brief.signals, brief.snapshot, period, {
-    provider: process.env.OPENROUTER_API_KEY ? 'openrouter' : 'deterministic',
-    projectName: brief.project_name,
-  });
+  const narrative = narrate(brief.signals, brief.snapshot, period, brief.project_name);
   return [
     `# Weekly Operator Brief (${period})`,
     '',

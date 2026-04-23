@@ -15,7 +15,7 @@ Email from Angela @ RevenueCat with PDF take-home. Stage 2 of interview process 
 ### 19:30 EDT — PDF parsed, requirements extracted
 Three deliverables: tool + content package (blog + video + 5 tweets) + growth campaign + process log. Submission as single public doc.
 
-API key: `sk_qdnvkjsVGhoVVNGiajqNHYIypcjgs` (read-only, V2, charts-metrics scope, Dark Noise project).
+API key: `sk_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx` (read-only, V2, charts-metrics scope, Dark Noise project).
 
 ### 20:15 EDT — Strategic decomposition
 GPT brief reviewed (`revenuecat-assignment/gpt-research-brief.md`). Convergent answer with my own analysis: build **Operator Signals**, not another AI dashboard.

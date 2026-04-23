@@ -1,11 +1,9 @@
 # RevenueCat Operator Brief — Dark Noise
 
-> Period: 2026-03-25 → 2026-04-22
-> Generated: 2026-04-22T17:14:33.840Z
+> Period: 2026-03-26 → 2026-04-23
+> Generated: 2026-04-23T01:32:46.165Z
 
-Dark Noise for 28d: Revenue: $4,919 · MRR: $4,562 · Active Subscriptions: 2,536. 28-day revenue ($4,919) is higher than MRR ($4,562). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.
-
-New customers are 55% of active subs in 28d: Check Conversion to Paying for the same window. Only 0.45 transactions per new customer in 28d: 627 transactions against 1,401 new customers. Most new users have not monetized yet.
+Dark Noise operator brief — 28d: MRR $4,562, revenue $4,919, churn 18.7%. 2 positive signals: New trials up 16% vs prior 28 days. Top signal: Revenue exceeds MRR by 7.8%. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
 
 ## KPI snapshot
 - **Active Trials**: 67

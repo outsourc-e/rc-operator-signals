@@ -41,7 +41,7 @@ export async function startServer(): Promise<void> {
       },
       {
         name: 'rc_weekly_brief',
-        description: 'Generate a weekly markdown brief. Uses deterministic narrative unless OPENROUTER_API_KEY is set.',
+        description: 'Generate a weekly markdown brief with deterministic narrative grounded in the signal engine.',
         inputSchema: {
           type: 'object',
           properties: {

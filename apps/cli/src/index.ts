@@ -3,8 +3,33 @@ import { readFile, writeFile } from 'node:fs/promises';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { RevenueCatCharts, type ChartResponse, type OverviewMetric } from '@outsourc-e/revenuecat-charts';
-import { narrate } from '../../../core/ai/index.js';
 import { buildBrief, type ChartCache, type OperatorBrief } from '../../../core/signals/index.js';
+
+/**
+ * Deterministic narrative: summarizes signals and top KPIs into a short brief.
+ * No LLM, no API key required. Briefs are grounded in the engine's signal rules.
+ */
+function narrate(signals: OperatorBrief['signals'], snapshot: OperatorBrief['snapshot'], period: string, projectName: string): string {
+  const mrr = snapshot.find((m) => String(m.id) === 'mrr');
+  const rev = snapshot.find((m) => String(m.id) === 'revenue');
+  // churn_rate comes from a time-series signal, not the overview snapshot
+  const churnSignal = signals.find((s) => s.id === 'churn_improving' || s.id === 'churn_worsening');
+  const churnRecent = churnSignal?.evidence.find((e) => e.metric === 'churn_rate_recent_30d');
+  const critical = signals.filter((s) => s.severity === 'critical');
+  const positive = signals.filter((s) => s.severity === 'positive');
+
+  const lines = [`${projectName} operator brief — ${period}:`];
+  const parts: string[] = [];
+  if (mrr) parts.push(`MRR $${mrr.value.toLocaleString()}`);
+  if (rev) parts.push(`revenue $${rev.value.toLocaleString()}`);
+  if (churnRecent) parts.push(`churn ${churnRecent.value}%`);
+  if (parts.length > 0) lines.push(parts.join(', ') + '.');
+  if (positive.length > 0) lines.push(`${positive.length} positive signal${positive.length > 1 ? 's' : ''}: ${positive[0].title}.`);
+  if (critical.length > 0) lines.push(`Critical attention: ${critical[0].title} — ${critical[0].detail}`);
+  else if (signals.length > 0) lines.push(`Top signal: ${signals[0].title}.`);
+  lines.push('Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.');
+  return lines.join(' ');
+}
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const FIXTURE_DIR = join(__dirname, '../../../core/fixtures/dark-noise');
@@ -16,7 +41,6 @@ interface Args {
   demo: boolean;
   key?: string;
   period: PeriodFlag;
-  ai: boolean;
   out?: string;
   json: boolean;
   projectId?: string;
@@ -29,13 +53,13 @@ interface BriefOutput {
 }
 
 function parseArgs(argv: string[]): Args {
-  const out: Args = { demo: false, period: '28d', ai: false, json: false };
+  const out: Args = { demo: false, period: '28d', json: false };
   for (let i = 2; i < argv.length; i += 1) {
     const arg = argv[i];
     if (arg === '--demo') out.demo = true;
     else if (arg === '--key' && argv[i + 1]) out.key = argv[++i];
     else if (arg === '--period' && argv[i + 1]) out.period = argv[++i] as PeriodFlag;
-    else if (arg === '--ai') out.ai = true;
+
     else if (arg === '--out' && argv[i + 1]) out.out = argv[++i];
     else if (arg === '--json') out.json = true;
     else if (arg === '--project' && argv[i + 1]) out.projectId = argv[++i];
@@ -135,9 +159,6 @@ function renderMarkdown(brief: OperatorBrief, narrative: string): string {
 
 async function buildOutput(args: Args): Promise<BriefOutput> {
   const source = args.demo ? await loadDemoCache() : await loadLiveCache(args);
-  if (args.ai && !process.env.OPENROUTER_API_KEY) {
-    throw new Error('--ai requires OPENROUTER_API_KEY.');
-  }
 
   const periodRange = dateRangeFromPeriod(args.period);
   const brief = buildBrief(source.cache, {
@@ -145,10 +166,7 @@ async function buildOutput(args: Args): Promise<BriefOutput> {
     period: periodRange,
   });
 
-  const narrative = await narrate(brief.signals, brief.snapshot, args.period, {
-    provider: args.ai ? 'openrouter' : 'deterministic',
-    projectName: brief.project_name,
-  });
+  const narrative = narrate(brief.signals, brief.snapshot, args.period, brief.project_name);
 
   return {
     brief,

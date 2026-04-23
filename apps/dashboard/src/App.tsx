@@ -2,9 +2,11 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { Layout } from './components/Layout';
 import { Brief } from './pages/Brief';
 import { Churn } from './pages/Churn';
+import { Integrations } from './pages/Integrations';
 import { MRR } from './pages/MRR';
 import { Overview } from './pages/Overview';
 import { Revenue } from './pages/Revenue';
+import { Signals } from './pages/Signals';
 import { Subscribers } from './pages/Subscribers';
 import { Trials } from './pages/Trials';
 
@@ -20,6 +22,8 @@ export function App() {
           <Route path="/churn" element={<Churn />} />
           <Route path="/trials" element={<Trials />} />
           <Route path="/brief" element={<Brief />} />
+          <Route path="/signals" element={<Signals />} />
+          <Route path="/integrations" element={<Integrations />} />
         </Route>
       </Routes>
     </BrowserRouter>

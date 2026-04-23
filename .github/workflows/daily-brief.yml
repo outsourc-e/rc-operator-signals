@@ -25,8 +25,6 @@ jobs:
       - run: pnpm install --frozen-lockfile=false
 
       - run: pnpm --filter dashboard prerender
-        env:
-          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
 
       - name: Commit updated dashboard data
         run: |
