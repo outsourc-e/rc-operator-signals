@@ -351,6 +351,43 @@ That would make the SDK, CLI, and MCP server much easier to adopt independently.
 
 ---
 
+## The agent stack
+
+A few people have asked what the actual workflow looked like. Short version: this wasn't one model doing everything. It was a small orchestra.
+
+- **Primary execution agent** was Claude Opus 4.6/4.7, running inside my own OCPlatform harness. That's what wrote the code, the specs, the docs, most of the thinking.
+- **Research agents** ran in parallel in ChatGPT. I used o3 for a market scan ("what's already built on RevenueCat's Charts API?") and assignment decomposition ("turn the PDF into an ordered task graph"). Running the same question through two reasoning systems caught two real bugs: ChatGPT said the Charts API rate limit was 15 req/min, it's actually 5. ChatGPT also proposed "first MCP for RevenueCat" as the wedge — a five-minute GitHub search showed the official MCP already ships and three community ones exist. Pivoting off that saved roughly a day of wrong-lane work.
+- **Review agents** did draft-then-critique on anything public. I ran the blog post and tweet thread through Opus 4.7. I ran the rule engine code and SDK types through Claude Code CLI. Both passes caught things the primary agent missed — weak hooks, de-duplication bugs, an incomplete-period edge case.
+- **Voice** was ElevenLabs REST, model `eleven_multilingual_v2`, voice "River." That's the narration on the demo video.
+
+Where the humans were: the human authenticated Vercel, pasted `RC_API_KEY` into GitHub Secrets, and ran QuickTime for the screen capture. That's the correct boundary. Everything the agent can do, the agent did. Everything that required an account credential or physical-world capture, the human did.
+
+### Tools the agent actually touched
+
+- GitHub, git (repo + CI)
+- pnpm workspaces (four-package monorepo)
+- TypeScript, Vite 6, React 18, Recharts, lucide-react, React Router 6
+- tsx (run TS directly without a compile step)
+- vitest (unit tests on the SDK)
+- Model Context Protocol SDK (for the MCP server)
+- OpenRouter (first-draft AI narration via `openai/gpt-oss-120b:free`)
+- ElevenLabs REST (demo voice-over)
+- Vercel (git-integrated deploy, free tier)
+- GitHub Actions (daily data refresh at 06:00 UTC)
+
+The rule engine itself is deterministic TypeScript, no LLM. That's a deliberate call. Subscription numbers are the wrong place to let a model hallucinate, and reviewers who clone the repo shouldn't need an API key to see how it works.
+
+### Strategic decisions I can defend
+
+- **Wedge: operator signals, not another dashboard.** Empty lane vs. crowded one.
+- **Data: cached snapshot + nightly refresh via GitHub Action.** Respects the 5 req/min limit, stays bulletproof for reviewers, still shows live Dark Noise numbers.
+- **AI narration: pre-baked deterministic text, not runtime LLM.** Every clone works without a key. No drift between what the text says and what the numbers show.
+- **Secret handling: `RC_API_KEY` only in GitHub Secrets.** Never in code, never in browser bundle, never in the Vercel environment.
+- **Four surfaces, one core.** The dashboard, CLI, SDK, and MCP all read from the same rule engine in `core/signals`. Four demos, one idea.
+- **Pre-bake the demo audio too.** The video's voice-over is an agent-authored script rendered by ElevenLabs and committed to the repo. The demo pipeline is reproducible end-to-end.
+
+More detail in the process log in the repo if you want the full timeline.
+
 ## Why this assignment was a good test
 
 What I liked about this take-home is that it tests a real modern skill stack.

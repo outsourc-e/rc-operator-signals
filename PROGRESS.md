@@ -200,3 +200,114 @@ That mapping is the submission's meta-argument: **agents do the work, humans hol
 - ✅ `RC_API_KEY` handled securely (GitHub Secret only; never in code, browser, or Vercel env)
 - ✅ Demo narration audio committed at 68.9 s (`content/media/demo-narration-v1.mp3`)
 - ⏳ Waiting on: human finalizing the video edit + pasting links into Ashby form
+
+---
+
+## Tooling & Workflow (what the agent orchestra looked like)
+
+The take-home asked specifically about **autonomy, efficiency, and process**. Here is the full toolchain the agent used, why each one, and where the tradeoffs were.
+
+### Primary agent
+
+- **Aurora** — Claude Opus 4.6 / 4.7 (Anthropic) via OCPlatform, the main execution brain. Handled planning, code, content, reasoning, review, orchestration. Everything in this repo was authored by Aurora unless noted below.
+
+### Research + decomposition (parallel agents)
+
+Before writing any code, the assignment was decomposed with multiple research agents running in parallel so the wedge decision was cross-checked.
+
+| Agent | Role | Artifact |
+|---|---|---|
+| **ChatGPT (o3 / GPT-5.4)** | Product-market research — "what's already built on RevenueCat's Charts API?" | `revenuecat-assignment/gpt-research-brief.md` |
+| **ChatGPT (same session)** | Assignment decomposition — "turn the PDF into an ordered task graph" | `revenuecat-assignment/gpt-decomposition.md` |
+| **Aurora (self)** | Independent wedge analysis on the same prompt | inline reasoning + `PROGRESS.md` decisions log |
+
+Running the same question through two reasoning systems caught two important things:
+1. ChatGPT claimed **15 req/min** rate limit; Aurora's API recon showed the real limit is **5 req/min**. The "cached snapshot" architecture choice hinged on this correction.
+2. ChatGPT's initial angle was "first MCP for RevenueCat." A five-minute GitHub search showed the official MCP already ships, plus at least three community MCPs. Pivoted the wedge from "first MCP" to "operator signals layer, MCP as secondary surface." That saved ~10 hours of wrong-lane work.
+
+### Review agents (critique loop)
+
+For high-stakes outputs the agent used a draft → critique → revise loop with a second model rather than shipping its own drafts:
+
+- **Claude Opus 4.7** — review pass on the blog post, tweet thread, and V3 design spec. Caught weak hooks, vague value claims, and over-explaining.
+- **Claude Code CLI (ACP runtime, Sonnet/Opus)** — review pass on the rule engine code + SDK types. Caught the de-dup bug (rules firing duplicates from multiple rule paths) and the incomplete-period edge case.
+
+### Execution tools
+
+| Tool | What it did | Why this tool |
+|---|---|---|
+| **GitHub / git** | Version control, public surface | Only thing reviewers will actually clone |
+| **pnpm workspaces** | Monorepo for dashboard + CLI + SDK + MCP | Four surfaces, one dependency graph, one install step |
+| **TypeScript + Vite 6** | Dashboard stack | Fastest ship, smallest bundle, Vercel-native |
+| **Recharts** | Charts in the dashboard | Good RevenueCat-adjacent visual language without custom d3 work |
+| **tsx** | Run TypeScript directly in scripts | No compile step between API recon and code |
+| **vitest** | Unit tests on the SDK | Shipping an SDK without tests is sloppy |
+| **MCP SDK (`@modelcontextprotocol/sdk`)** | `@outsourc-e/revenuecat-mcp` server | Required surface for agent-native usage |
+| **OpenRouter** | First pass at the AI brief narration (later replaced with deterministic generation) | Free tier via `openai/gpt-oss-120b:free`, good for first draft |
+| **ElevenLabs REST** | Demo video voice-over | Agent-authored narration, not human voice |
+
+### API recon
+
+Before writing anything, the agent probed the real Charts API surface:
+
+- Authenticated against the real `sk_...` key.
+- Pulled `/projects/{id}/metrics/overview` — 7 metrics, real Dark Noise numbers.
+- Probed `/charts/{slug}/options` for 17 candidate slugs to discover which names the API actually accepts.
+- Saved every response to `revenuecat-assignment/api-recon/` as ground-truth reference.
+
+This is what gave the signal engine real numbers to work with from hour 2. Nothing in the project used mock data after that point.
+
+### Deployment + infrastructure
+
+| Step | Tool | Who |
+|---|---|---|
+| Git host | GitHub (`outsourc-e/rc-operator-signals`) | Agent pushed; human owns the org |
+| Web host | Vercel (free tier, git integration) | Agent authored config; human did OAuth |
+| Daily refresh | GitHub Actions (cron `0 6 * * *` UTC) | Agent authored workflow |
+| Secrets | GitHub Encrypted Secrets (`RC_API_KEY`) | Human pasted into the UI |
+| Package manager pinning | `packageManager: pnpm@10.18.2` in root package.json | Agent, to stabilize CI across Node versions |
+| Node pinning | `engines.node: "22.x"` in root package.json | Agent, after Vercel's default Node 24 broke the build |
+
+### Key decisions and tradeoffs
+
+Documented live in `PROGRESS.md` — highlights:
+
+| # | Decision | Chose | Tradeoff |
+|---|---|---|---|
+| 1 | Wedge | Operator Signals + MCP as secondary | Harder to explain than "I built a dashboard," but empty lane vs. crowded one |
+| 2 | Demo data source | Cached snapshot + GitHub Action refresh | Not real-time in the browser, but respects 5 req/min and stays bulletproof for reviewers |
+| 3 | AI layer | Pre-baked JSON (deterministic narration) | Loses the "live LLM" wow factor, but every clone works without API keys and no review-time drift |
+| 4 | Author identity | Aurora-the-agent (operated by Eric) | The role IS being an agent. Disclosure matches the assignment. |
+| 5 | Stack | TS + Vite (no SSR) | Lose SEO depth, gain 2-second builds and one-click deploys |
+| 6 | Video format | AI narration + human-captured screen | Audio-to-visual timing isn't frame-perfect, but keeps 100% of content generation in the agent layer |
+| 7 | Rule engine | Deterministic (not LLM-driven) | Less "magical" feel, but zero hallucination risk on subscription numbers |
+
+### Anti-patterns the agent avoided
+
+- ❌ **Hardcoding the API key** in the repo so live data would render client-side. Proposed; rejected immediately. Browser bundle is public. Key belongs in GitHub Secrets only.
+- ❌ **Building a second dashboard.** RevenueCat already ships charts. "Prettier chart" is not a wedge.
+- ❌ **Calling an LLM at runtime.** Every reviewer would hit that LLM budget while evaluating. Pre-bake instead.
+- ❌ **A monorepo without a shared core.** The dashboard, CLI, and MCP all reuse `core/signals` rather than each re-implementing the rule engine.
+- ❌ **Trying to ship "first MCP for RevenueCat."** Five minutes of research killed that angle. Saved a day.
+
+### Efficiency wins (self-audit)
+
+- **Time-to-first-real-signal:** hour 2 (revenue-exceeds-MRR fired against real Dark Noise data). Not hour 40.
+- **Material edit discipline:** when the Signals page redesign was rejected, it was reverted in one commit rather than defended.
+- **Draft → critique → revise loop:** used for the blog post and the rule engine, not for routine code.
+- **One source of truth:** the CLI's `--json` output feeds the dashboard prerender. Rules live in `core/signals`. No duplicate logic.
+- **Reproducibility:** the demo narration, the AI briefs, the dashboard data — all regenerate from committed inputs. Anyone can clone and reproduce.
+
+### Agent autonomy scoring (honest)
+
+Using the autonomy ladder from the `ControlSuite` / `OCPlatform` internal framework:
+
+- Level 0 (text completion): unused
+- Level 1 (code completion): unused
+- Level 2 (chat turn): used for scoping questions with the human
+- Level 3 (tool use): primary mode — every file edit, every API call, every git command
+- Level 4 (multi-step planning): used for the monorepo carve-out, V3 redesign, deploy pipeline
+- Level 5 (multi-agent orchestration): used during research (ChatGPT + Aurora), review (Opus 4.7 + Claude Code CLI), and audio generation (ElevenLabs)
+- Level 6 (autonomous long-horizon): what the 48-hour take-home actually tested
+
+That final level is the whole point of the Agentic AI Advocate role. The boundary in practice is what this project showed: agents can sit in the L6 loop, but they still route back to a human for OAuth, secrets, screen capture, and final submission. The submission itself is the demonstration.
