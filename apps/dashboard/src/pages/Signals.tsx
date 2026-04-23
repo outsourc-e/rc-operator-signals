@@ -1,64 +1,39 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { Breadcrumbs } from '../components/Breadcrumbs';
-import { evaluateRules, type RuleCategory, type RuleStatus, type Severity } from '../lib/data';
+import { allSignals as getAll, brief, type Severity } from '../lib/data';
 import { formatNumber } from '../lib/format';
 
-type StatusFilter = 'all' | RuleStatus;
-type SeverityFilter = 'all' | Severity;
-type CategoryFilter = 'all' | RuleCategory;
-
-const statusOrder: Record<RuleStatus, number> = { fired: 0, watchlist: 1, cleared: 2 };
+const severities: Array<Severity | 'all'> = ['all', 'critical', 'warning', 'info', 'positive'];
 const severityOrder: Record<Severity, number> = { critical: 0, warning: 1, info: 2, positive: 3 };
-
-const categories: CategoryFilter[] = ['all', 'Monetization', 'Acquisition', 'Retention', 'Data Quality'];
+const PAGE_SIZE = 5;
 
 export function Signals() {
-  const [statusFilter, setStatusFilter] = useState<StatusFilter>('all');
-  const [severityFilter, setSeverityFilter] = useState<SeverityFilter>('all');
-  const [categoryFilter, setCategoryFilter] = useState<CategoryFilter>('all');
+  const [filter, setFilter] = useState<Severity | 'all'>('all');
+  const [page, setPage] = useState(1);
 
-  const rules = useMemo(() => {
-    const evaluations = evaluateRules();
-    return evaluations.sort((a, b) => {
-      const statusDiff = statusOrder[a.status] - statusOrder[b.status];
-      if (statusDiff !== 0) return statusDiff;
-      if (a.signal && b.signal) {
-        return severityOrder[a.signal.severity] - severityOrder[b.signal.severity];
-      }
-      return a.name.localeCompare(b.name);
-    });
-  }, []);
-
-  const counts = useMemo(() => {
-    const firedSigs = rules.filter((r) => r.status === 'fired');
-    return {
-      total: rules.length,
-      fired: firedSigs.length,
-      cleared: rules.filter((r) => r.status === 'cleared').length,
-      watchlist: rules.filter((r) => r.status === 'watchlist').length,
-      critical: firedSigs.filter((r) => r.signal?.severity === 'critical').length,
-      warning: firedSigs.filter((r) => r.signal?.severity === 'warning').length,
-      info: firedSigs.filter((r) => r.signal?.severity === 'info').length,
-      positive: firedSigs.filter((r) => r.signal?.severity === 'positive').length,
-      categories: {
-        Monetization: rules.filter((r) => r.category === 'Monetization').length,
-        Acquisition: rules.filter((r) => r.category === 'Acquisition').length,
-        Retention: rules.filter((r) => r.category === 'Retention').length,
-        'Data Quality': rules.filter((r) => r.category === 'Data Quality').length,
-      },
-    };
-  }, [rules]);
-
-  const filtered = useMemo(() => {
-    return rules.filter((rule) => {
-      if (statusFilter !== 'all' && rule.status !== statusFilter) return false;
-      if (severityFilter !== 'all') {
-        if (!rule.signal || rule.signal.severity !== severityFilter) return false;
-      }
-      if (categoryFilter !== 'all' && rule.category !== categoryFilter) return false;
+  const allSignals = useMemo(() => {
+    const combined = [...getAll(), ...brief.watchlist];
+    const seen = new Set<string>();
+    const deduped = combined.filter((s) => {
+      if (seen.has(s.id)) return false;
+      seen.add(s.id);
       return true;
     });
-  }, [rules, statusFilter, severityFilter, categoryFilter]);
+    return deduped.sort((a, b) => severityOrder[a.severity] - severityOrder[b.severity]);
+  }, []);
+
+  const filtered = useMemo(() => {
+    if (filter === 'all') return allSignals;
+    return allSignals.filter((s) => s.severity === filter);
+  }, [allSignals, filter]);
+
+  const totalPages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE));
+  const currentPage = Math.min(page, totalPages);
+  const paged = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+
+  useEffect(() => {
+    setPage(1);
+  }, [filter]);
 
   return (
     <div className="page">
@@ -72,127 +47,76 @@ export function Signals() {
         <div>
           <h1>Signals</h1>
           <p className="page-subtitle">
-            {counts.fired} of {counts.total} rules fired against the live 28-day window. Cleared rules evaluated the same data and found nothing anomalous.
+            Fired by the signal engine this period, sorted by severity.
           </p>
+        </div>
+        <div className="page-indicator">
+          <button
+            className="page-indicator-btn"
+            onClick={() => setPage((p) => Math.max(1, p - 1))}
+            disabled={currentPage <= 1}
+            aria-label="Previous page"
+          >
+            ←
+          </button>
+          <span className="page-indicator-label">
+            Page <strong>{currentPage}</strong> of {totalPages}
+          </span>
+          <button
+            className="page-indicator-btn"
+            onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
+            disabled={currentPage >= totalPages}
+            aria-label="Next page"
+          >
+            →
+          </button>
         </div>
       </div>
 
       <div className="signals-layout">
         <aside className="signals-rail">
-          <div className="signals-rail-group">
-            <div className="signals-rail-heading">Status</div>
-            {(['all', 'fired', 'watchlist', 'cleared'] as StatusFilter[]).map((status) => (
+          <div className="signals-rail-heading">Severity</div>
+          {severities.map((s) => {
+            const count = s === 'all' ? allSignals.length : allSignals.filter((sig) => sig.severity === s).length;
+            return (
               <button
-                key={status}
-                className={`rail-btn ${statusFilter === status ? 'active' : ''}`}
-                onClick={() => setStatusFilter(status)}
+                key={s}
+                className={`rail-btn ${filter === s ? 'active' : ''}`}
+                onClick={() => setFilter(s)}
               >
                 <span className="rail-btn-label">
-                  {status === 'all' ? 'All rules' : status.charAt(0).toUpperCase() + status.slice(1)}
+                  {s === 'all' ? 'All' : s.charAt(0).toUpperCase() + s.slice(1)}
                 </span>
-                <span className="rail-btn-count">
-                  {status === 'all' ? counts.total : counts[status]}
-                </span>
+                <span className="rail-btn-count">{count}</span>
               </button>
-            ))}
-          </div>
-
-          <div className="signals-rail-group">
-            <div className="signals-rail-heading">Severity (fired only)</div>
-            {(['all', 'critical', 'warning', 'info', 'positive'] as SeverityFilter[]).map((sev) => (
-              <button
-                key={sev}
-                className={`rail-btn ${severityFilter === sev ? 'active' : ''}`}
-                onClick={() => setSeverityFilter(sev)}
-              >
-                <span className="rail-btn-label">
-                  {sev === 'all' ? 'All severities' : sev.charAt(0).toUpperCase() + sev.slice(1)}
-                </span>
-                <span className="rail-btn-count">
-                  {sev === 'all' ? counts.fired : counts[sev]}
-                </span>
-              </button>
-            ))}
-          </div>
-
-          <div className="signals-rail-group">
-            <div className="signals-rail-heading">Category</div>
-            {categories.map((cat) => (
-              <button
-                key={cat}
-                className={`rail-btn ${categoryFilter === cat ? 'active' : ''}`}
-                onClick={() => setCategoryFilter(cat)}
-              >
-                <span className="rail-btn-label">
-                  {cat === 'all' ? 'All categories' : cat}
-                </span>
-                <span className="rail-btn-count">
-                  {cat === 'all' ? counts.total : counts.categories[cat]}
-                </span>
-              </button>
-            ))}
-          </div>
+            );
+          })}
         </aside>
 
         <section className="signals-main">
-          <div className="signals-summary">
-            <div className="signals-summary-stat">
-              <div className="signals-summary-value">{counts.total}</div>
-              <div className="signals-summary-label">Rules evaluated</div>
-            </div>
-            <div className="signals-summary-stat">
-              <div className="signals-summary-value" style={{ color: 'var(--rc-pink, #EE5A60)' }}>{counts.fired}</div>
-              <div className="signals-summary-label">Fired</div>
-            </div>
-            <div className="signals-summary-stat">
-              <div className="signals-summary-value" style={{ color: 'var(--warn, #E5A400)' }}>{counts.watchlist}</div>
-              <div className="signals-summary-label">Watchlist</div>
-            </div>
-            <div className="signals-summary-stat">
-              <div className="signals-summary-value" style={{ color: 'var(--text-muted, #8a8f98)' }}>{counts.cleared}</div>
-              <div className="signals-summary-label">Cleared</div>
-            </div>
-          </div>
-
           <div className="brief-list">
-            {filtered.map((rule) => (
-              <article key={rule.id} className={`brief-item rule-item rule-${rule.status}`}>
+            {paged.map((s) => (
+              <article key={s.id} className="brief-item">
                 <div className="brief-item-left">
-                  <span className={`status-pill ${rule.status}`}>
-                    {rule.status === 'fired' && '● FIRED'}
-                    {rule.status === 'watchlist' && '◆ WATCH'}
-                    {rule.status === 'cleared' && '○ CLEAR'}
-                  </span>
-                  {rule.signal && (
-                    <span className={`severity-pill ${rule.signal.severity}`}>{rule.signal.severity}</span>
-                  )}
-                  <span className="rule-category-chip">{rule.category}</span>
+                  <span className={`severity-pill ${s.severity}`}>{s.severity}</span>
                 </div>
                 <div className="brief-item-body">
-                  <div className="brief-item-title">
-                    {rule.signal ? rule.signal.title : rule.name}
-                  </div>
-                  <div className="brief-item-detail">
-                    {rule.signal ? rule.signal.detail : rule.description}
-                  </div>
-                  <div className="rule-trigger">
-                    <span className="rule-trigger-label">Trigger</span>
-                    <code>{rule.trigger}</code>
-                  </div>
-                  {rule.signal?.evidence && rule.signal.evidence.length > 0 && (
+                  <div className="brief-item-title">{s.title}</div>
+                  <div className="brief-item-detail">{s.detail}</div>
+                  {s.evidence?.length > 0 && (
                     <div className="brief-item-evidence">
-                      {rule.signal.evidence.map((e, i) => (
-                        <span key={`${rule.id}-${i}`} className="evidence-chip">
+                      {s.evidence.map((e, i) => (
+                        <span key={`${s.id}-${i}`} className="evidence-chip">
                           {e.metric}: {formatNumber(e.value)}{e.period ? ` · ${e.period}` : ''}
                         </span>
                       ))}
                     </div>
                   )}
                 </div>
-                {rule.signal?.followup && (
+                {s.followup && (
                   <div className="brief-item-followup">
                     <span className="brief-item-followup-label">Next action</span>
-                    <span className="brief-item-followup-text">{rule.signal.followup}</span>
+                    <span className="brief-item-followup-text">{s.followup}</span>
                   </div>
                 )}
               </article>
@@ -201,7 +125,7 @@ export function Signals() {
 
           {filtered.length === 0 && (
             <div className="note-card" style={{ textAlign: 'center', padding: '32px' }}>
-              No rules match the current filters.
+              No signals match the current filter.
             </div>
           )}
         </section>
