@@ -4,25 +4,47 @@ import { resolve } from 'node:path';
 
 mkdirSync('./src/data', { recursive: true });
 
-const briefJson = execSync('cd ../.. && pnpm exec tsx apps/cli/src/index.ts --demo --json', {
+// Live mode vs demo mode:
+// - If RC_API_KEY is set, CLI pulls live chart data from the Charts API
+// - Otherwise, CLI reads ./core/fixtures/dark-noise (safe for forkers/CI without secrets)
+// The CLI returns both `brief` and `cache` (raw chart + overview data), so we can
+// build the full dashboard JSON off the same source without re-reading fixtures.
+const liveMode = Boolean(process.env.RC_API_KEY) && process.env.PRERENDER_MODE !== 'demo';
+const cliArgs = liveMode ? '--period 28d --json' : '--demo --json';
+const briefJson = execSync(`cd ../.. && pnpm exec tsx apps/cli/src/index.ts ${cliArgs}`, {
   encoding: 'utf-8',
+  env: { ...process.env },
+  maxBuffer: 64 * 1024 * 1024,
 });
 const briefOutput = JSON.parse(briefJson);
+
 writeFileSync('./src/data/brief.json', JSON.stringify(briefOutput.brief, null, 2));
 writeFileSync('./src/data/brief-today.md', briefOutput.markdown);
 
-const fixtureDir = resolve('../../core/fixtures/dark-noise');
-const load = (file) => JSON.parse(readFileSync(`${fixtureDir}/${file}`, 'utf8'));
+const projectName = briefOutput.project_name || 'Dark Noise';
+const cache = briefOutput.cache;
 
-const overview = load('overview.json');
-const charts = {
-  revenue: load('revenue.json'),
-  mrr: load('mrr.json'),
-  actives: load('actives.json'),
-  actives_movement: load('actives_movement.json'),
-  trials_movement: load('trials_movement.json'),
-  churn: load('churn.json'),
-};
+let overview;
+let charts;
+
+if (cache) {
+  // Live or demo via CLI-provided cache (single source of truth)
+  overview = { metrics: cache.overview };
+  charts = cache.charts;
+} else {
+  // Fallback: read fixtures directly (older CLI output, shouldn't hit normally)
+  const fixtureDir = resolve('../../core/fixtures/dark-noise');
+  const load = (file) => JSON.parse(readFileSync(`${fixtureDir}/${file}`, 'utf8'));
+  overview = load('overview.json');
+  charts = {
+    revenue: load('revenue.json'),
+    mrr: load('mrr.json'),
+    actives: load('actives.json'),
+    actives_movement: load('actives_movement.json'),
+    trials_movement: load('trials_movement.json'),
+    churn: load('churn.json'),
+  };
+}
 
 function valuesFor(chart, measure, opts = {}) {
   const { skipIncomplete = true, lastN = null } = opts;
@@ -111,7 +133,12 @@ function stackedSeries(chart, lastN = 28) {
 
 const dashboardData = {
   generated_at: new Date().toISOString(),
-  project: { id: 'proj058a6330', name: 'Dark Noise', stores: 'App Store · Play Store' },
+  data_mode: liveMode ? 'live' : 'demo',
+  project: {
+    id: 'proj058a6330',
+    name: projectName,
+    stores: 'App Store · Play Store',
+  },
   period: {
     end: new Date().toISOString().slice(0, 10),
     start: new Date(Date.now() - 28 * 86400000).toISOString().slice(0, 10),
@@ -148,9 +175,11 @@ const dashboardData = {
   all_time: {
     revenue: charts.revenue.summary?.total?.Revenue ?? 0,
     transactions: charts.revenue.summary?.total?.Transactions ?? 0,
-    earliest_date: charts.revenue.start_date ? new Date(charts.revenue.start_date * 1000).toISOString().slice(0, 10) : null,
+    earliest_date: charts.revenue.start_date
+      ? new Date(charts.revenue.start_date * 1000).toISOString().slice(0, 10)
+      : null,
   },
 };
 
 writeFileSync('./src/data/dashboard.json', JSON.stringify(dashboardData, null, 2));
-console.log('Pre-rendered dashboard.json, brief.json, brief-today.md');
+console.log(`Pre-rendered dashboard.json, brief.json, brief-today.md (mode=${liveMode ? 'live' : 'demo'})`);

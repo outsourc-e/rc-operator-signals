@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T01:32:46.165Z",
+  "generated_at": "2026-04-23T02:45:47.451Z",
   "project_name": "Dark Noise",
   "period": {
     "start": "2026-03-26",
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 67
+      "value": 52
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2536
+      "value": 2540
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4562
+      "value": 4570
     },
     {
       "description": "Last 28 days",
@@ -48,40 +48,40 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4919
+      "value": 4971
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1776808739641,
-      "last_updated_at_iso8601": "2026-04-21T21:58:59.641617+00:00",
+      "last_updated_at": 1776905999748,
+      "last_updated_at_iso8601": "2026-04-23T00:59:59.748348+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1401
+      "value": 1368
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1776808739641,
-      "last_updated_at_iso8601": "2026-04-21T21:58:59.641617+00:00",
+      "last_updated_at": 1776905999748,
+      "last_updated_at_iso8601": "2026-04-23T00:59:59.748348+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 13580
+      "value": 13312
     },
     {
       "description": "Last 28 days",
       "id": "num_tx_last_28_days",
-      "last_updated_at": 1776808739641,
-      "last_updated_at_iso8601": "2026-04-21T21:58:59.641617+00:00",
+      "last_updated_at": 1776905999748,
+      "last_updated_at_iso8601": "2026-04-23T00:59:59.748348+00:00",
       "name": "Number of transactions in the last 28 days",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 627
+      "value": 625
     }
   ],
   "signals": [
@@ -89,17 +89,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 7.8%",
-      "detail": "28-day revenue ($4,919) is higher than MRR ($4,562). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 8.8%",
+      "detail": "28-day revenue ($4,971) is higher than MRR ($4,570). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4919,
+          "value": 4971,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4562,
+          "value": 4570,
           "period": "P28D"
         }
       ],
@@ -110,17 +110,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 55% of active subs in 28d",
-      "detail": "1,401 new customers arrived against a paid base of 2,536. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 54% of active subs in 28d",
+      "detail": "1,368 new customers arrived against a paid base of 2,540. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1401,
+          "value": 1368,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2536
+          "value": 2540
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -129,158 +129,37 @@
       "id": "low_transaction_density",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Only 0.45 transactions per new customer in 28d",
-      "detail": "627 transactions against 1,401 new customers. Most new users have not monetized yet.",
+      "title": "Only 0.46 transactions per new customer in 28d",
+      "detail": "625 transactions against 1,368 new customers. Most new users have not monetized yet.",
       "evidence": [
         {
           "metric": "num_tx_last_28_days",
-          "value": 627
+          "value": 625
         },
         {
           "metric": "new_customers",
-          "value": 1401
+          "value": 1368
         }
       ]
-    },
-    {
-      "id": "revenue_declining_3_periods",
-      "severity": "warning",
-      "kind": "fact",
-      "title": "Revenue declining across 3 consecutive 28-day periods",
-      "detail": "Revenue: $5148 → $4984 → $4939. Sustained downtrend across 84 days. Not a single-period dip, this is structural.",
-      "evidence": [
-        {
-          "metric": "revenue_period_1",
-          "value": 5148.18,
-          "period": "84-56d ago"
-        },
-        {
-          "metric": "revenue_period_2",
-          "value": 4983.95,
-          "period": "56-28d ago"
-        },
-        {
-          "metric": "revenue_period_3",
-          "value": 4939.380000000001,
-          "period": "last 28d"
-        }
-      ],
-      "followup": "Segment revenue by product and store to identify which stream is declining."
-    },
-    {
-      "id": "mrr_stagnation",
-      "severity": "warning",
-      "kind": "interpretation",
-      "title": "MRR is flat (-0.0% over 28 days)",
-      "detail": "Average daily MRR moved from $4540 to $4539. New subscriptions and churn are likely cancelling each other out.",
-      "evidence": [
-        {
-          "metric": "mrr_avg_recent_28d",
-          "value": 4539
-        },
-        {
-          "metric": "mrr_avg_prior_28d",
-          "value": 4540
-        }
-      ],
-      "followup": "Pull MRR Movement chart to see if new vs churned are balancing."
-    },
-    {
-      "id": "trials_surging",
-      "severity": "positive",
-      "kind": "fact",
-      "title": "New trials up 16% vs prior 28 days",
-      "detail": "281 new trials in the last 28 days vs 242 prior. Top-of-funnel is expanding.",
-      "evidence": [
-        {
-          "metric": "new_trials_recent_28d",
-          "value": 281
-        },
-        {
-          "metric": "new_trials_prior_28d",
-          "value": 242
-        }
-      ]
-    },
-    {
-      "id": "churn_improving",
-      "severity": "positive",
-      "kind": "fact",
-      "title": "Churn rate improving (18.7% vs 23.7% prior)",
-      "detail": "30-day average churn rate decreased from 23.7% to 18.7%. Retention is strengthening.",
-      "evidence": [
-        {
-          "metric": "churn_rate_recent_30d",
-          "value": 18.7
-        },
-        {
-          "metric": "churn_rate_prior_30d",
-          "value": 23.7
-        }
-      ]
-    },
-    {
-      "id": "arpu_flat",
-      "severity": "info",
-      "kind": "interpretation",
-      "title": "Revenue per subscriber flat for 3 consecutive periods",
-      "detail": "ARPU (28d revenue / avg active subs): $2.03 → $1.97 → $1.95. Pricing power is not improving.",
-      "evidence": [
-        {
-          "metric": "arpu_period_1",
-          "value": 2.03,
-          "period": "84-56d ago"
-        },
-        {
-          "metric": "arpu_period_2",
-          "value": 1.97,
-          "period": "56-28d ago"
-        },
-        {
-          "metric": "arpu_period_3",
-          "value": 1.95,
-          "period": "last 28d"
-        }
-      ],
-      "followup": "Segment by product duration to check if mix shift is masking ARPU movement."
     }
   ],
-  "contradictions": [
-    {
-      "id": "mrr_stagnation",
-      "severity": "warning",
-      "kind": "interpretation",
-      "title": "MRR is flat (-0.0% over 28 days)",
-      "detail": "Average daily MRR moved from $4540 to $4539. New subscriptions and churn are likely cancelling each other out.",
-      "evidence": [
-        {
-          "metric": "mrr_avg_recent_28d",
-          "value": 4539
-        },
-        {
-          "metric": "mrr_avg_prior_28d",
-          "value": 4540
-        }
-      ],
-      "followup": "Pull MRR Movement chart to see if new vs churned are balancing."
-    }
-  ],
+  "contradictions": [],
   "watchlist": [
     {
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 55% of active subs in 28d",
-      "detail": "1,401 new customers arrived against a paid base of 2,536. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 54% of active subs in 28d",
+      "detail": "1,368 new customers arrived against a paid base of 2,540. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1401,
+          "value": 1368,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2536
+          "value": 2540
         }
       ],
       "followup": "Check Conversion to Paying for the same window."

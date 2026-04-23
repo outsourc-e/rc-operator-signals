@@ -1,9 +1,29 @@
 name: Daily brief prerender
 
+# Fetches live RevenueCat Charts data via the Charts API, regenerates
+# dashboard + brief JSON, commits the result. Vercel auto-redeploys on
+# the resulting push.
+#
+# Secrets required:
+#   RC_API_KEY  - RevenueCat API v2 read-only key (charts_metrics scope)
+#
+# If RC_API_KEY is missing, the job still runs and regenerates from the
+# committed fixtures (safe no-op that keeps CI green for forks).
+
 on:
   schedule:
+    # Every day at 06:00 UTC (~02:00 EDT / ~23:00 PDT prior day)
     - cron: '0 6 * * *'
   workflow_dispatch:
+    inputs:
+      mode:
+        description: 'live | demo'
+        required: false
+        default: 'live'
+
+concurrency:
+  group: daily-brief
+  cancel-in-progress: false
 
 jobs:
   prerender:
@@ -12,6 +32,10 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+        with:
+          # Need full history so the auto-commit step can push back to main
+          fetch-depth: 0
+          persist-credentials: true
 
       - uses: pnpm/action-setup@v4
         with:
@@ -19,18 +43,26 @@ jobs:
 
       - uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: pnpm
 
-      - run: pnpm install --frozen-lockfile=false
+      - name: Install workspace
+        run: pnpm install --frozen-lockfile=false
 
-      - run: pnpm --filter dashboard prerender
+      - name: Prerender dashboard + brief (live if RC_API_KEY set, else demo)
+        env:
+          RC_API_KEY: ${{ secrets.RC_API_KEY }}
+          PRERENDER_MODE: ${{ github.event.inputs.mode || 'live' }}
+        run: pnpm --filter dashboard prerender
 
       - name: Commit updated dashboard data
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add apps/dashboard/src/data/dashboard.json apps/dashboard/src/data/brief.json apps/dashboard/src/data/brief-today.md
-          git diff --cached --quiet && exit 0
-          git commit -m "chore: refresh daily operator brief"
+          if git diff --cached --quiet; then
+            echo "No data changes, skipping commit."
+            exit 0
+          fi
+          git commit -m "chore: refresh daily operator brief [skip ci]"
           git push

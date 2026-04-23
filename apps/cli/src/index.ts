@@ -50,6 +50,8 @@ interface BriefOutput {
   brief: OperatorBrief;
   narrative: string;
   markdown: string;
+  cache?: ChartCache;
+  project_name?: string;
 }
 
 function parseArgs(argv: string[]): Args {
@@ -172,6 +174,8 @@ async function buildOutput(args: Args): Promise<BriefOutput> {
     brief,
     narrative,
     markdown: renderMarkdown(brief, narrative),
+    cache: source.cache,
+    project_name: source.projectName,
   };
 }
 
