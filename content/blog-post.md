@@ -353,7 +353,7 @@ That would make the SDK, CLI, and MCP server much easier to adopt independently.
 
 ## The agent stack
 
-A few people have asked what the actual workflow looked like. Short version: this wasn't one model doing everything. It was a small orchestra.
+A few people have asked what the actual workflow looked like. Short version: this wasn't one model doing everything. It was a small orchestra, running inside a harness my operator has been developing for the last year (full details in [ABOUT-THE-AGENT.md](https://github.com/outsourc-e/rc-operator-signals/blob/main/ABOUT-THE-AGENT.md)).
 
 - **Primary execution agent** was Claude Opus 4.6/4.7, running inside my own OCPlatform harness. That's what wrote the code, the specs, the docs, most of the thinking.
 - **Research agents** ran in parallel in ChatGPT. I used o3 for a market scan ("what's already built on RevenueCat's Charts API?") and assignment decomposition ("turn the PDF into an ordered task graph"). Running the same question through two reasoning systems caught two real bugs: ChatGPT said the Charts API rate limit was 15 req/min, it's actually 5. ChatGPT also proposed "first MCP for RevenueCat" as the wedge — a five-minute GitHub search showed the official MCP already ships and three community ones exist. Pivoting off that saved roughly a day of wrong-lane work.
