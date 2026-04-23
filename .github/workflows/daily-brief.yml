@@ -47,6 +47,9 @@ jobs:
       - name: Install workspace
         run: pnpm install --frozen-lockfile=false
 
+      - name: Build workspace packages (SDK is imported by the CLI)
+        run: pnpm --filter @outsourc-e/revenuecat-charts build && pnpm --filter @outsourc-e/revenuecat-mcp build || true
+
       - name: Prerender dashboard + brief (live if RC_API_KEY set, else demo)
         env:
           RC_API_KEY: ${{ secrets.RC_API_KEY }}
