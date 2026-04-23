@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T03:26:13.902Z",
+  "generated_at": "2026-04-23T04:56:23.188Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -17,7 +17,7 @@
     {
       "id": "active_trials",
       "name": "Active Trials",
-      "value": 53,
+      "value": 54,
       "unit": "#",
       "period": "P0D",
       "delta": null,
@@ -55,7 +55,7 @@
     {
       "id": "active_subscriptions",
       "name": "Active Subscriptions",
-      "value": 2540,
+      "value": 2541,
       "unit": "#",
       "period": "P0D",
       "delta": null,
@@ -93,7 +93,7 @@
     {
       "id": "mrr",
       "name": "MRR",
-      "value": 4570,
+      "value": 4572,
       "unit": "$",
       "period": "P28D",
       "delta": null,
@@ -207,7 +207,7 @@
     {
       "id": "active_users",
       "name": "Active Users",
-      "value": 13312,
+      "value": 13319,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -216,7 +216,7 @@
     {
       "id": "num_tx_last_28_days",
       "name": "Number of transactions in the last 28 days",
-      "value": 625,
+      "value": 623,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -1192,16 +1192,16 @@
   },
   "subscription_movement": {
     "starting": 0,
-    "ending": 2540,
+    "ending": 2541,
     "new": 118,
     "reactivation": 16,
     "churned": -125,
     "movement": 9
   },
   "trial_funnel": {
-    "active_users": 13312,
+    "active_users": 13319,
     "new_trials_28d": 272,
-    "active_trials": 53,
+    "active_trials": 54,
     "converted_estimated": 178
   },
   "incomplete_charts": [
@@ -1213,8 +1213,8 @@
     "churn"
   ],
   "all_time": {
-    "revenue": 5051.28,
-    "transactions": 356,
+    "revenue": 5071.27,
+    "transactions": 357,
     "earliest_date": "2026-03-26"
   }
 }
