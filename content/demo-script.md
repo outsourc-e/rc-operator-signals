@@ -10,7 +10,7 @@
 
 - [ ] Close every tab except: dashboard, Claude Desktop (MCP demo), terminal
 - [ ] Set browser to full screen, hide bookmarks bar, zoom to 110%
-- [ ] Dashboard on live Vercel URL (not localhost) so the URL bar is on-brand
+- [ ] Dashboard on live Vercel URL (https://rc-operator-signals.vercel.app) so the URL bar is on-brand
 - [ ] Dark mode on
 - [ ] Terminal: `iTerm2`, 16pt JetBrains Mono, clear history, `cd rc-operator-signals`
 - [ ] Claude Desktop with the MCP server connected and a preloaded chat ready to demo
