@@ -1,78 +1,98 @@
-# Tweet Thread Drafts
+# Tweet Drafts — Final
 
-Each is a standalone tweet — mix and match to land the 5 required.
-
----
-
-## Tweet 1 — The hook
-
-RevenueCat posted an Agentic AI Advocate role. The take-home said "build a tool with our Charts API."
-
-I pointed my AI agent at the brief. It shipped a dashboard, CLI, SDK, and MCP server in 48h.
-
-Every page has an AI brief. Zero API keys needed.
-
-→ [github link]
+Use these as the 5 required tweets. They can be posted as standalone tweets or as a thread.
 
 ---
 
-## Tweet 2 — The product pitch
+## Tweet 1 — Main launch hook
 
-Dashboards show what moved. Operator Signals shows what deserves attention.
+RevenueCat posted an Agentic AI Advocate role and asked candidates to build something useful with the Charts API.
 
-• 10+ deterministic rules that flag contradictions (revenue up + MRR flat = non-recurring mix)
-• AI briefs pre-baked into the repo — no runtime LLM, no keys
-• MCP server for Claude Desktop
+I pointed an AI agent at the 48-hour take-home.
 
-[screenshot: home]
+It shipped:
+- a dashboard
+- a CLI
+- a TypeScript SDK
+- an MCP server for Claude Desktop
 
----
-
-## Tweet 3 — The MCP angle
-
-Everyone's building MCPs for email and Slack.
-
-I built one for subscription revenue.
-
-Ask Claude: "What's my MRR this month?" — it queries the RevenueCat Charts API, detects anomalies, and writes the brief.
-
-[screenshot: integrations]
-
-npm i -D @outsourc-e/revenuecat-mcp
+Repo: https://github.com/outsourc-e/rc-operator-signals
 
 ---
 
-## Tweet 4 — Show the CLI
+## Tweet 2 — Product wedge
 
+Dashboards show what moved.
+
+**RC Operator Signals** shows what deserves attention.
+
+It detects contradictions, leading indicators, and caveats in subscription data, like:
+- revenue up while MRR is flat
+- trials rising ahead of paid conversion
+- incomplete current-period data that shouldn't be over-trusted
+
+---
+
+## Tweet 3 — MCP angle
+
+The most fun part of this project was the MCP server.
+
+You can wire RevenueCat into Claude Desktop / Cursor / Cline and ask:
+- “What’s my MRR this month?”
+- “Any churn anomalies?”
+- “Give me a weekly operator brief.”
+
+That feels a lot closer to the future than another static dashboard.
+
+---
+
+## Tweet 4 — CLI angle
+
+I also shipped a terminal-native operator brief:
+
+```bash
+npx @outsourc-e/rc-brief --demo
 ```
-$ npx @outsourc-e/rc-brief --demo
 
-# Dark Noise operator brief — 28d
-MRR $4,562, revenue $4,919, churn 18.7%
+Output:
+- MRR
+- revenue
+- churn
+- fired signals
+- caveats
+- next action
 
-Top signal: Revenue exceeds MRR by 7.8%
-Next: audit what changed 3-4 weeks ago — that's where
-the current trends were seeded.
-```
-
-Piped to Slack every Monday morning. 5 signals fire across 9 rules.
-
-[screenshot: brief]
+Basically: a Monday-morning subscription memo in markdown.
 
 ---
 
-## Tweet 5 — The agent story
+## Tweet 5 — Agent story + disclosure
 
-48 hours. 4 deliverables. 1 agent.
+This was built by an autonomous AI agent as part of RevenueCat’s Agentic AI Advocate take-home.
 
-This is what "Agentic AI Advocate" actually looks like: an autonomous agent that reads the brief, ships the code, writes the docs, and launches the content.
+Human oversight was used where it mattered: account-bound actions like deployment, submission, and package publishing.
 
-Full process log and architecture in the repo.
+I think that’s the right boundary.
 
-[github link]
+Agents should do the work. Humans should hold the keys.
 
 ---
 
-## Process log disclosure (pin to first tweet)
+## Recommended post order
 
-Disclosure: this thread was authored by an autonomous AI agent as part of RevenueCat's take-home for their Agentic AI Advocate role. Everything shipped in a 48-hour window. Full process log: [link]
+If posting as a thread:
+1. Tweet 1
+2. Tweet 2
+3. Tweet 3
+4. Tweet 4
+5. Tweet 5
+
+If posting as separate tweets, lead with Tweet 1 and Tweet 3.
+
+## Suggested screenshot mapping
+
+- Tweet 1 → Home screenshot
+- Tweet 2 → Signals screenshot
+- Tweet 3 → Integrations screenshot
+- Tweet 4 → Brief screenshot
+- Tweet 5 → no image or repo screenshot
