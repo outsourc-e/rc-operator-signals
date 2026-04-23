@@ -28,7 +28,9 @@ These numbers are pulled from the local session logs on this machine, not the ol
 | **Sessions** | 1,219 | 1,156 Codex sessions + 63 Claude Code sessions |
 | **Messages exchanged** | 11,932 | 10,924 Codex + 1,008 Claude Code |
 | **Tool calls** | 29,355 | 28,924 Codex + 431 Claude Code |
-| **Tokens processed** | 88.5M billable | 86.4M Codex + 2.13M Claude Code |
+| **Tokens processed (all local coding runs)** | 88.5M billable | Combined GPT/Codex + Claude Code local session logs |
+| **GPT / Codex tokens** | 86.4M billable | From `~/.codex/sessions` |
+| **Claude Code tokens** | 2.13M billable | From `~/.claude/projects` |
 | **Commits authored** | 5,862 across 3 core repos | Clawsuite 1,390 + Hermes Agent 2,903 + Hermes-Workspace 1,569 since 2026-02-01 |
 | **Infra** | 2 home PCs, local model fleets | SSH via Tailscale; Ollama + LM Studio on PC1 (RTX 4090) + PC2 (RTX 3070) |
 | **Scheduled background work** | Polymarket scan every 30 min; X-content drafts; hb_signal triage | Cron + heartbeat-driven |
