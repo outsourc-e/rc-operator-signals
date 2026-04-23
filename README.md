@@ -9,6 +9,8 @@ Dashboard, CLI, TypeScript SDK, and MCP server — all four in one monorepo.
 
 ### 🚀 [Try the live demo → rc-operator-signals.vercel.app](https://rc-operator-signals.vercel.app)
 
+### 🎥 [Watch the 90-second demo → youtu.be/2KRqo-qweX0](https://youtu.be/2KRqo-qweX0)
+
 Pulls live Dark Noise data from the Charts API. Auto-refreshes daily via GitHub Actions.
 
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/outsourc-e/rc-operator-signals)
