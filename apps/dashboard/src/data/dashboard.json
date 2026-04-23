@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T02:45:47.471Z",
+  "generated_at": "2026-04-23T03:18:20.607Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -17,7 +17,7 @@
     {
       "id": "active_trials",
       "name": "Active Trials",
-      "value": 52,
+      "value": 53,
       "unit": "#",
       "period": "P0D",
       "delta": null,
@@ -131,7 +131,7 @@
     {
       "id": "revenue",
       "name": "Revenue",
-      "value": 4971,
+      "value": 4950,
       "unit": "$",
       "period": "P28D",
       "delta": null,
@@ -1201,7 +1201,7 @@
   "trial_funnel": {
     "active_users": 13312,
     "new_trials_28d": 272,
-    "active_trials": 52,
+    "active_trials": 53,
     "converted_estimated": 178
   },
   "incomplete_charts": [

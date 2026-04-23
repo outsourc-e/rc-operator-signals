@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-04-23T02:45:47.451Z",
+  "generated_at": "2026-04-23T03:18:20.591Z",
   "project_name": "Dark Noise",
   "period": {
     "start": "2026-03-26",
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 52
+      "value": 53
     },
     {
       "description": "In total",
@@ -48,7 +48,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4971
+      "value": 4950
     },
     {
       "description": "Last 28 days",
@@ -89,12 +89,12 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 8.8%",
-      "detail": "28-day revenue ($4,971) is higher than MRR ($4,570). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 8.3%",
+      "detail": "28-day revenue ($4,950) is higher than MRR ($4,570). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4971,
+          "value": 4950,
           "period": "P28D"
         },
         {

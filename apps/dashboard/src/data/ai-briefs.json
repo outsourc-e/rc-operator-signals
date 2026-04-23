@@ -47,5 +47,12 @@
     "model": "openai/gpt-oss-120b:free",
     "generated_at": "2026-04-23T00:15:01.324Z",
     "topic": "executive summary of the period"
+  },
+  "signals": {
+    "text": "The engine fired 3 signals against Dark Noise's live 28-day window. Revenue exceeds MRR by 8.3%; New customers are 54% of active subs in 28d; Only 0.46 transactions per new customer in 28d. Together these show where the engine thinks attention is warranted right now — strong signals get a follow-up action; info-level signals surface context rather than alarm. Watchlist flags that some charts still have incomplete current-period data, so do not over-trust the newest bucket.",
+    "source": "rules",
+    "model": null,
+    "generated_at": "2026-04-23T03:18:20.591Z",
+    "topic": "signal engine output this period"
   }
 }

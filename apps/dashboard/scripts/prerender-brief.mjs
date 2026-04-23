@@ -182,4 +182,33 @@ const dashboardData = {
 };
 
 writeFileSync('./src/data/dashboard.json', JSON.stringify(dashboardData, null, 2));
+
+// Refresh the deterministic `signals` entry in ai-briefs.json so the Signals
+// page stays in sync with the fired signals on every data refresh.
+try {
+  const briefsPath = './src/data/ai-briefs.json';
+  const briefs = JSON.parse(readFileSync(briefsPath, 'utf8'));
+  const b = briefOutput.brief;
+  const sigs = b?.signals ?? [];
+  const wl = b?.watchlist ?? [];
+  const titles = sigs.map((s) => s.title);
+  const count = sigs.length;
+  const wlNote = wl.some((s) => s.id === 'incomplete_period_active')
+    ? ' Watchlist flags that some charts still have incomplete current-period data, so do not over-trust the newest bucket.'
+    : '';
+  const text = count === 0
+    ? `The engine evaluated all 10 rules against ${projectName}'s live 28-day window and none of them tripped. The business is healthy on every dimension the engine checks — revenue, MRR, churn, trial velocity, ARPU, and transaction density.${wlNote}`
+    : `The engine fired ${count} signal${count === 1 ? '' : 's'} against ${projectName}'s live 28-day window. ${titles.join('; ')}. Together these show where the engine thinks attention is warranted right now — strong signals get a follow-up action; info-level signals surface context rather than alarm.${wlNote}`;
+  briefs.signals = {
+    text: text.trim(),
+    source: 'rules',
+    model: null,
+    generated_at: b?.generated_at ?? new Date().toISOString(),
+    topic: 'signal engine output this period',
+  };
+  writeFileSync(briefsPath, JSON.stringify(briefs, null, 2));
+} catch (err) {
+  console.warn('Could not update ai-briefs.signals:', err?.message ?? err);
+}
+
 console.log(`Pre-rendered dashboard.json, brief.json, brief-today.md (mode=${liveMode ? 'live' : 'demo'})`);

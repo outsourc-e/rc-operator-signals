@@ -1,6 +1,6 @@
 import aiBriefs from '../data/ai-briefs.json';
 
-type BriefId = keyof typeof aiBriefs;
+type BriefId = keyof typeof aiBriefs | 'signals';
 type BriefEntry = {
   text: string;
   source: 'ai' | 'rules';
