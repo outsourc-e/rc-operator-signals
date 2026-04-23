@@ -16,6 +16,7 @@ It shipped:
 - a TypeScript SDK
 - an MCP server for Claude Desktop
 
+Live: https://rc-operator-signals.vercel.app
 Repo: https://github.com/outsourc-e/rc-operator-signals
 
 ---
@@ -62,7 +63,9 @@ Output:
 - caveats
 - next action
 
-Basically: a Monday-morning subscription memo in markdown.
+A Monday-morning subscription memo in markdown.
+
+Live dashboard: https://rc-operator-signals.vercel.app
 
 ---
 

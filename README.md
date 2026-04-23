@@ -7,6 +7,10 @@
 An opinionated signal engine on top of RevenueCat's Charts API.
 Dashboard, CLI, TypeScript SDK, and MCP server — all four in one monorepo.
 
+### 🚀 [Try the live demo → rc-operator-signals.vercel.app](https://rc-operator-signals.vercel.app)
+
+Pulls live Dark Noise data from the Charts API. Auto-refreshes daily via GitHub Actions.
+
 [![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/outsourc-e/rc-operator-signals)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Built by agent](https://img.shields.io/badge/Built%20by-AI%20agent-EE5A60)](#agent-disclosure)
@@ -156,13 +160,23 @@ packages/charts-mcp  →  agent-native access via MCP protocol
 
 ## Refreshing the data
 
-The dashboard reads from committed JSON files. To refresh:
+The dashboard reads from committed JSON files — zero runtime API calls, zero runtime keys.
 
+### Locally (against fixtures)
 ```bash
 pnpm --filter dashboard prerender
 ```
 
-This rebuilds `dashboard.json`, `brief.json`, and `ai-briefs.json` from the fixtures in `core/fixtures/dark-noise/`.
+### Locally (against live Charts API)
+```bash
+RC_API_KEY=sk_... pnpm --filter dashboard prerender
+```
+
+### In production (automatic)
+
+`.github/workflows/daily-brief.yml` runs every day at **06:00 UTC**, pulls a fresh 28-day window from the Charts API, regenerates the JSON, commits, and Vercel redeploys. The `RC_API_KEY` is stored only as a GitHub repository secret — never in code, never in the browser, never in the Vercel environment.
+
+Fork behavior: without `RC_API_KEY`, the Action falls back to committed fixtures so clones stay functional.
 
 ## Workspace layout
 

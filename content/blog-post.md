@@ -1,5 +1,8 @@
 # I set my AI agent loose on RevenueCat's 48-hour take-home. Here's what it shipped.
 
+**Live demo: [rc-operator-signals.vercel.app](https://rc-operator-signals.vercel.app)**
+**Repo: [github.com/outsourc-e/rc-operator-signals](https://github.com/outsourc-e/rc-operator-signals)**
+
 48 hours. 4 deliverables. 1 agent.
 
 RevenueCat posted a role called **Agentic AI Advocate**. The take-home was unusually well-designed because it didn't just ask for code. It asked for the whole loop: build a public tool, write the launch post, create content, propose a growth plan, and document the process.
@@ -299,13 +302,13 @@ During screenshot review, a few subtle issues showed up:
 
 That was actually useful. The vision audit was less about cosmetics and more about whether the output looked like a product someone would trust.
 
-### 4. Deploy still depends on human auth
+### 4. Deploy still depended on human auth
 
-The product is build-complete, but Vercel deployment is blocked on login.
+The product was build-complete before the deploy happened. Vercel login and the `RC_API_KEY` secret both needed a human to turn the key — one click to authorize Vercel, one paste to save the GitHub secret.
 
-That is the honest boundary between autonomous execution and real-world account control. An agent can prep the repo, harden the product, write the launch materials, and make the deployment almost trivial. But if the account isn't authenticated, a human still has to turn the key.
+That's the honest boundary between autonomous execution and real-world account control. An agent can prep the repo, harden the product, write the launch materials, wire a GitHub Action for daily refresh, and make the deployment a single click. But the account itself still belongs to a human.
 
-That's not a failure. That's just reality.
+That's not a failure. That's just reality, and it's a good place for the boundary to live.
 
 ---
 
@@ -376,16 +379,15 @@ That is what this repo is trying to demonstrate.
 
 ## Try it
 
-If you want to inspect the project yourself:
+Three ways in, pick whichever fits your flow.
 
-- Clone the repo
-- Run the dashboard locally
-- Try the CLI in demo mode
-- Drop the MCP server into Claude Desktop
+### 1. Live demo
 
-Repo: `https://github.com/outsourc-e/rc-operator-signals`
+[rc-operator-signals.vercel.app](https://rc-operator-signals.vercel.app)
 
-Quick start:
+Pulls live Dark Noise data from RevenueCat's Charts API. Refreshes daily via a GitHub Action that keeps the `RC_API_KEY` out of both the browser and the Vercel environment — it lives only as a GitHub repository secret.
+
+### 2. Clone and run locally
 
 ```bash
 git clone https://github.com/outsourc-e/rc-operator-signals
@@ -395,15 +397,17 @@ pnpm build
 pnpm --filter dashboard dev
 ```
 
-Then open `http://localhost:5180`.
+Open `http://localhost:5180`. No API key needed — it uses committed Dark Noise fixtures so clones work out of the box.
 
-If you prefer the terminal:
+### 3. Terminal
 
 ```bash
 pnpm --filter @outsourc-e/rc-brief start -- --demo
 ```
 
-And if you want the agent-native route, wire up the MCP server and ask Claude for a weekly operator brief.
+### 4. Claude Desktop (MCP)
+
+Wire up the MCP server, restart Claude Desktop, and ask for a weekly operator brief. Setup instructions are in the repo's [MCP README](https://github.com/outsourc-e/rc-operator-signals/tree/main/packages/charts-mcp).
 
 ---
 
