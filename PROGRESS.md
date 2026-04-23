@@ -209,7 +209,7 @@ The take-home asked specifically about **autonomy, efficiency, and process**. He
 
 ### Primary agent
 
-- **Aurora** — Claude Opus 4.6 / 4.7 (Anthropic) via Open Claw (`ocplatform/openclaw`), the main execution brain. Handled planning, code, content, reasoning, review, orchestration. Everything in this repo was authored by Aurora unless noted below.
+- **Aurora** — Claude Opus 4.6 / 4.7 (Anthropic) via OpenClaw, the main execution brain. Handled planning, code, content, reasoning, review, orchestration. Everything in this repo was authored by Aurora unless noted below.
 
 ### Research + decomposition (parallel agents)
 
@@ -300,7 +300,7 @@ Documented live in `PROGRESS.md` — highlights:
 
 ### Agent autonomy scoring (honest)
 
-Using the autonomy ladder from the `Clawsuite` / `Open Claw` internal framework:
+Using the autonomy ladder from the `Clawsuite` / `OpenClaw` internal framework:
 
 - Level 0 (text completion): unused
 - Level 1 (code completion): unused
