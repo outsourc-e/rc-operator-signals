@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-05T08:17:36.501Z",
+  "generated_at": "2026-05-07T08:40:32.890Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-04-07",
-    "end": "2026-05-05"
+    "start": "2026-04-09",
+    "end": "2026-05-07"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 48
+      "value": 52
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2555
+      "value": 2564
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4603
+      "value": 4624
     },
     {
       "description": "Last 28 days",
@@ -48,40 +48,40 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 5303
+      "value": 5194
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1777959119601,
-      "last_updated_at_iso8601": "2026-05-05T05:31:59.601919+00:00",
+      "last_updated_at": 1778139179471,
+      "last_updated_at_iso8601": "2026-05-07T07:32:59.471182+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1265
+      "value": 1288
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1777959119601,
-      "last_updated_at_iso8601": "2026-05-05T05:31:59.601919+00:00",
+      "last_updated_at": 1778139179471,
+      "last_updated_at_iso8601": "2026-05-07T07:32:59.471182+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 13093
+      "value": 13155
     },
     {
       "description": "Last 28 days",
       "id": "num_tx_last_28_days",
-      "last_updated_at": 1777959119601,
-      "last_updated_at_iso8601": "2026-05-05T05:31:59.601919+00:00",
+      "last_updated_at": 1778139179471,
+      "last_updated_at_iso8601": "2026-05-07T07:32:59.471182+00:00",
       "name": "Number of transactions in the last 28 days",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 611
+      "value": 603
     }
   ],
   "signals": [
@@ -89,17 +89,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 15.2%",
-      "detail": "28-day revenue ($5,303) is higher than MRR ($4,603). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 12.3%",
+      "detail": "28-day revenue ($5,194) is higher than MRR ($4,624). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5303,
+          "value": 5194,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4603,
+          "value": 4624,
           "period": "P28D"
         }
       ],
@@ -111,16 +111,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 50% of active subs in 28d",
-      "detail": "1,265 new customers arrived against a paid base of 2,555. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,288 new customers arrived against a paid base of 2,564. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1265,
+          "value": 1288,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2555
+          "value": 2564
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -129,16 +129,16 @@
       "id": "low_transaction_density",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Only 0.48 transactions per new customer in 28d",
-      "detail": "611 transactions against 1,265 new customers. Most new users have not monetized yet.",
+      "title": "Only 0.47 transactions per new customer in 28d",
+      "detail": "603 transactions against 1,288 new customers. Most new users have not monetized yet.",
       "evidence": [
         {
           "metric": "num_tx_last_28_days",
-          "value": 611
+          "value": 603
         },
         {
           "metric": "new_customers",
-          "value": 1265
+          "value": 1288
         }
       ]
     }
@@ -150,16 +150,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 50% of active subs in 28d",
-      "detail": "1,265 new customers arrived against a paid base of 2,555. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,288 new customers arrived against a paid base of 2,564. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1265,
+          "value": 1288,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2555
+          "value": 2564
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
