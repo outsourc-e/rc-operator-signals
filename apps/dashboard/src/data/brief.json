@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-05-20T09:42:18.127Z",
+  "generated_at": "2026-05-21T09:50:21.372Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-04-22",
-    "end": "2026-05-20"
+    "start": "2026-04-23",
+    "end": "2026-05-21"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 62
+      "value": 63
     },
     {
       "description": "In total",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4684
+      "value": 4687
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 5446
+      "value": 5247
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1779262439627,
-      "last_updated_at_iso8601": "2026-05-20T07:33:59.627392+00:00",
+      "last_updated_at": 1779348839616,
+      "last_updated_at_iso8601": "2026-05-21T07:33:59.616262+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1353
+      "value": 1376
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1779262439627,
-      "last_updated_at_iso8601": "2026-05-20T07:33:59.627392+00:00",
+      "last_updated_at": 1779348839616,
+      "last_updated_at_iso8601": "2026-05-21T07:33:59.616262+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 12969
+      "value": 12965
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 16.3%",
-      "detail": "28-day revenue ($5,446) is higher than MRR ($4,684). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 11.9%",
+      "detail": "28-day revenue ($5,247) is higher than MRR ($4,687). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5446,
+          "value": 5247,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4684,
+          "value": 4687,
           "period": "P28D"
         }
       ],
@@ -99,12 +99,12 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 52% of active subs in 28d",
-      "detail": "1,353 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 53% of active subs in 28d",
+      "detail": "1,376 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1353,
+          "value": 1376,
           "period": "28d"
         },
         {
@@ -121,12 +121,12 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 52% of active subs in 28d",
-      "detail": "1,353 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 53% of active subs in 28d",
+      "detail": "1,376 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1353,
+          "value": 1376,
           "period": "28d"
         },
         {
