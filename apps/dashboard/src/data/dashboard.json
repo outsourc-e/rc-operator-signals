@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-06-07T09:20:05.980Z",
+  "generated_at": "2026-06-08T11:04:00.697Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -7,22 +7,21 @@
     "stores": "App Store · Play Store"
   },
   "period": {
-    "end": "2026-06-07",
-    "start": "2026-05-10",
+    "end": "2026-06-08",
+    "start": "2026-05-11",
     "days": 28,
-    "prior_end": "2026-05-10",
-    "prior_start": "2026-04-12"
+    "prior_end": "2026-05-11",
+    "prior_start": "2026-04-13"
   },
   "kpis": [
     {
       "id": "active_trials",
       "name": "Active Trials",
-      "value": 42,
+      "value": 43,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        9,
         11,
         21,
         14,
@@ -49,18 +48,18 @@
         5,
         7,
         5,
-        9
+        9,
+        3
       ]
     },
     {
       "id": "active_subscriptions",
       "name": "Active Subscriptions",
-      "value": 2621,
+      "value": 2623,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        2563,
         2564,
         2570,
         2569,
@@ -87,18 +86,18 @@
         2617,
         2617,
         2618,
-        2620
+        2620,
+        2623
       ]
     },
     {
       "id": "mrr",
       "name": "MRR",
-      "value": 4758,
+      "value": 4754,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        4615.34,
         4619.55,
         4630.73,
         4629.32,
@@ -125,18 +124,18 @@
         4738.48,
         4743.05,
         4745.82,
-        4750.74
+        4750.74,
+        4752.73
       ]
     },
     {
       "id": "revenue",
       "name": "Revenue",
-      "value": 5122,
+      "value": 5225,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        201.24,
         210.93,
         182.81,
         199.89,
@@ -163,18 +162,18 @@
         110.84,
         44.87,
         132.69,
-        219.73
+        219.73,
+        235.62
       ]
     },
     {
       "id": "new_customers",
       "name": "New Customers",
-      "value": 1594,
+      "value": 1589,
       "unit": "#",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        4,
         5,
         9,
         7,
@@ -201,13 +200,14 @@
         3,
         3,
         5,
-        2
+        2,
+        4
       ]
     },
     {
       "id": "active_users",
       "name": "Active Users",
-      "value": 13001,
+      "value": 13013,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -216,11 +216,6 @@
   ],
   "series": {
     "revenue": [
-      {
-        "date": "2026-05-10",
-        "value": 201.24,
-        "incomplete": false
-      },
       {
         "date": "2026-05-11",
         "value": 210.93,
@@ -355,14 +350,14 @@
         "date": "2026-06-06",
         "value": 219.73,
         "incomplete": false
+      },
+      {
+        "date": "2026-06-07",
+        "value": 235.62,
+        "incomplete": false
       }
     ],
     "mrr": [
-      {
-        "date": "2026-05-10",
-        "value": 4615.34,
-        "incomplete": false
-      },
       {
         "date": "2026-05-11",
         "value": 4619.55,
@@ -497,14 +492,14 @@
         "date": "2026-06-06",
         "value": 4750.74,
         "incomplete": false
+      },
+      {
+        "date": "2026-06-07",
+        "value": 4752.73,
+        "incomplete": false
       }
     ],
     "actives": [
-      {
-        "date": "2026-05-10",
-        "value": 2563,
-        "incomplete": false
-      },
       {
         "date": "2026-05-11",
         "value": 2564,
@@ -639,14 +634,14 @@
         "date": "2026-06-06",
         "value": 2620,
         "incomplete": false
+      },
+      {
+        "date": "2026-06-07",
+        "value": 2623,
+        "incomplete": false
       }
     ],
     "churn_rate": [
-      {
-        "date": "2026-05-10",
-        "value": 16,
-        "incomplete": false
-      },
       {
         "date": "2026-05-11",
         "value": 23,
@@ -781,16 +776,14 @@
         "date": "2026-06-06",
         "value": 8,
         "incomplete": false
+      },
+      {
+        "date": "2026-06-07",
+        "value": 11,
+        "incomplete": false
       }
     ],
     "mrr_movement": [
-      {
-        "date": "2026-05-10",
-        "New Actives": 4,
-        "Resubscription Actives": 0,
-        "Churned Actives": 4,
-        "Movement": 0
-      },
       {
         "date": "2026-05-11",
         "New Actives": 5,
@@ -979,15 +972,16 @@
         "Resubscription Actives": 2,
         "Churned Actives": 2,
         "Movement": 2
+      },
+      {
+        "date": "2026-06-07",
+        "New Actives": 4,
+        "Resubscription Actives": 1,
+        "Churned Actives": 2,
+        "Movement": 3
       }
     ],
     "trials_movement": [
-      {
-        "date": "2026-05-10",
-        "New Trials": 9,
-        "Expired Trials": 3,
-        "Movement": 6
-      },
       {
         "date": "2026-05-11",
         "New Trials": 11,
@@ -1149,22 +1143,28 @@
         "New Trials": 9,
         "Expired Trials": 10,
         "Movement": -1
+      },
+      {
+        "date": "2026-06-07",
+        "New Trials": 3,
+        "Expired Trials": 6,
+        "Movement": -3
       }
     ]
   },
   "subscription_movement": {
     "starting": 0,
-    "ending": 2621,
+    "ending": 2623,
     "new": 160,
-    "reactivation": 16,
-    "churned": -119,
-    "movement": 57
+    "reactivation": 17,
+    "churned": -117,
+    "movement": 60
   },
   "trial_funnel": {
-    "active_users": 13001,
-    "new_trials_28d": 264,
-    "active_trials": 42,
-    "converted_estimated": 179
+    "active_users": 13013,
+    "new_trials_28d": 258,
+    "active_trials": 43,
+    "converted_estimated": 181
   },
   "incomplete_charts": [
     "revenue",
@@ -1175,8 +1175,8 @@
     "churn"
   ],
   "all_time": {
-    "revenue": 5255.82,
-    "transactions": 381,
-    "earliest_date": "2026-05-10"
+    "revenue": 5358.28,
+    "transactions": 384,
+    "earliest_date": "2026-05-11"
   }
 }
