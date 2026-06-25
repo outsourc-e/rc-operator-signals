@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-06-24T09:38:04.551Z",
+  "generated_at": "2026-06-25T09:32:26.949Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-05-27",
-    "end": "2026-06-24"
+    "start": "2026-05-28",
+    "end": "2026-06-25"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 58
+      "value": 57
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2591
+      "value": 2585
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4696
+      "value": 4681
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4801
+      "value": 4781
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1782286319889,
-      "last_updated_at_iso8601": "2026-06-24T07:31:59.889185+00:00",
+      "last_updated_at": 1782372659529,
+      "last_updated_at_iso8601": "2026-06-25T07:30:59.529065+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1404
+      "value": 1372
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1782286319889,
-      "last_updated_at_iso8601": "2026-06-24T07:31:59.889185+00:00",
+      "last_updated_at": 1782372659529,
+      "last_updated_at_iso8601": "2026-06-25T07:30:59.529065+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 12881
+      "value": 12819
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,404 new customers arrived against a paid base of 2,591. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 53% of active subs in 28d",
+      "detail": "1,372 new customers arrived against a paid base of 2,585. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1404,
+          "value": 1372,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2591
+          "value": 2585
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -100,17 +100,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,404 new customers arrived against a paid base of 2,591. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 53% of active subs in 28d",
+      "detail": "1,372 new customers arrived against a paid base of 2,585. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1404,
+          "value": 1372,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2591
+          "value": 2585
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
