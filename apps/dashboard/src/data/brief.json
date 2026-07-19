@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-18T07:57:54.465Z",
+  "generated_at": "2026-07-19T08:24:53.133Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-06-20",
-    "end": "2026-07-18"
+    "start": "2026-06-21",
+    "end": "2026-07-19"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 51
+      "value": 55
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2593
+      "value": 2594
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4460
+      "value": 4455
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1784352779437,
-      "last_updated_at_iso8601": "2026-07-18T05:32:59.437895+00:00",
+      "last_updated_at": 1784446319506,
+      "last_updated_at_iso8601": "2026-07-19T07:31:59.506404+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1390
+      "value": 1395
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1784352779437,
-      "last_updated_at_iso8601": "2026-07-18T05:32:59.437895+00:00",
+      "last_updated_at": 1784446319506,
+      "last_updated_at_iso8601": "2026-07-19T07:31:59.506404+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 12780
+      "value": 12790
     }
   ],
   "signals": [
@@ -78,12 +78,12 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "MRR exceeds Revenue by 5.4%",
-      "detail": "MRR ($4,713) exceeds 28-day revenue ($4,460). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
+      "title": "MRR exceeds Revenue by 5.5%",
+      "detail": "MRR ($4,713) exceeds 28-day revenue ($4,455). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4460,
+          "value": 4455,
           "period": "P28D"
         },
         {
@@ -100,16 +100,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,390 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,395 new customers arrived against a paid base of 2,594. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1390,
+          "value": 1395,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2593
+          "value": 2594
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -122,16 +122,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,390 new customers arrived against a paid base of 2,593. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,395 new customers arrived against a paid base of 2,594. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1390,
+          "value": 1395,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2593
+          "value": 2594
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
