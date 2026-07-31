@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-07-30T08:32:40.386Z",
+  "generated_at": "2026-07-31T08:55:01.281Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-07-02",
-    "end": "2026-07-30"
+    "start": "2026-07-03",
+    "end": "2026-07-31"
   },
   "snapshot": [
     {
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4557
+      "value": 4589
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1785389399578,
-      "last_updated_at_iso8601": "2026-07-30T05:29:59.578386+00:00",
+      "last_updated_at": 1785475799585,
+      "last_updated_at_iso8601": "2026-07-31T05:29:59.585743+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1412
+      "value": 1432
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1785389399578,
-      "last_updated_at_iso8601": "2026-07-30T05:29:59.578386+00:00",
+      "last_updated_at": 1785475799585,
+      "last_updated_at_iso8601": "2026-07-31T05:29:59.585743+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 12753
+      "value": 12752
     }
   ],
   "signals": [
@@ -78,12 +78,12 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,412 new customers arrived against a paid base of 2,612. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 55% of active subs in 28d",
+      "detail": "1,432 new customers arrived against a paid base of 2,612. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1412,
+          "value": 1432,
           "period": "28d"
         },
         {
@@ -100,12 +100,12 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 54% of active subs in 28d",
-      "detail": "1,412 new customers arrived against a paid base of 2,612. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 55% of active subs in 28d",
+      "detail": "1,432 new customers arrived against a paid base of 2,612. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1412,
+          "value": 1432,
           "period": "28d"
         },
         {
