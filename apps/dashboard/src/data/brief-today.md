@@ -1,20 +1,20 @@
 # RevenueCat Operator Brief — Dark Noise
 
-> Period: 2026-07-06 → 2026-08-03
-> Generated: 2026-08-03T09:52:42.261Z
+> Period: 2026-07-07 → 2026-08-04
+> Generated: 2026-08-04T08:42:48.236Z
 
-Dark Noise operator brief — 28d: MRR $4,763, revenue $4,715. Top signal: New customers are 55% of active subs in 28d. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
+Dark Noise operator brief — 28d: MRR $4,764, revenue $4,779. Top signal: New customers are 55% of active subs in 28d. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
 
 ## KPI snapshot
-- **Active Trials**: 71
-- **Active Subscriptions**: 2,618
-- **MRR**: $4,763
-- **Revenue**: $4,715
-- **New Customers**: 1,436
-- **Active Users**: 12,722
+- **Active Trials**: 67
+- **Active Subscriptions**: 2,620
+- **MRR**: $4,764
+- **Revenue**: $4,779
+- **New Customers**: 1,428
+- **Active Users**: 12,720
 
 ## Fired signals
-- **New customers are 55% of active subs in 28d**: 1,436 new customers arrived against a paid base of 2,618. Growth is healthy, but conversion to paying may still be leaving money on the table.
+- **New customers are 55% of active subs in 28d**: 1,428 new customers arrived against a paid base of 2,620. Growth is healthy, but conversion to paying may still be leaving money on the table.
 - **6 chart(s) have incomplete current-period data**: Charts with incomplete recent values: Revenue, MRR, Active Subscriptions, Active Subscriptions Movement, Active Trials Movement, Churn. The latest bucket is provisional.
 
 ## Caveats
