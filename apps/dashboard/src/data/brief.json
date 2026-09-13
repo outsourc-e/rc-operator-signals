@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-09-12T10:21:19.232Z",
+  "generated_at": "2026-09-13T11:21:26.433Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-08-15",
-    "end": "2026-09-12"
+    "start": "2026-08-16",
+    "end": "2026-09-13"
   },
   "snapshot": [
     {
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2634
+      "value": 2633
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4777
+      "value": 4776
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4213
+      "value": 4390
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1789198199500,
-      "last_updated_at_iso8601": "2026-09-12T07:29:59.500152+00:00",
+      "last_updated_at": 1789284599824,
+      "last_updated_at_iso8601": "2026-09-13T07:29:59.824858+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1117
+      "value": 1113
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1789198199500,
-      "last_updated_at_iso8601": "2026-09-12T07:29:59.500152+00:00",
+      "last_updated_at": 1789284599824,
+      "last_updated_at_iso8601": "2026-09-13T07:29:59.824858+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 12314
+      "value": 12450
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "MRR exceeds Revenue by 11.8%",
-      "detail": "MRR ($4,777) exceeds 28-day revenue ($4,213). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
+      "title": "MRR exceeds Revenue by 8.1%",
+      "detail": "MRR ($4,776) exceeds 28-day revenue ($4,390). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4213,
+          "value": 4390,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4777,
+          "value": 4776,
           "period": "P28D"
         }
       ],
@@ -100,16 +100,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 42% of active subs in 28d",
-      "detail": "1,117 new customers arrived against a paid base of 2,634. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,113 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1117,
+          "value": 1113,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2634
+          "value": 2633
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -122,16 +122,16 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 42% of active subs in 28d",
-      "detail": "1,117 new customers arrived against a paid base of 2,634. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,113 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1117,
+          "value": 1113,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2634
+          "value": 2633
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
