@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-19T10:33:38.977Z",
+  "generated_at": "2026-09-20T10:56:07.917Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -7,22 +7,21 @@
     "stores": "App Store · Play Store"
   },
   "period": {
-    "end": "2026-09-19",
-    "start": "2026-08-22",
+    "end": "2026-09-20",
+    "start": "2026-08-23",
     "days": 28,
-    "prior_end": "2026-08-22",
-    "prior_start": "2026-07-25"
+    "prior_end": "2026-08-23",
+    "prior_start": "2026-07-26"
   },
   "kpis": [
     {
       "id": "active_trials",
       "name": "Active Trials",
-      "value": 86,
+      "value": 89,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        5,
         8,
         12,
         7,
@@ -49,18 +48,18 @@
         33,
         15,
         10,
-        4
+        4,
+        9
       ]
     },
     {
       "id": "active_subscriptions",
       "name": "Active Subscriptions",
-      "value": 2649,
+      "value": 2650,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        2609,
         2607,
         2610,
         2614,
@@ -87,56 +86,56 @@
         2647,
         2648,
         2646,
-        2648
+        2648,
+        2651
       ]
     },
     {
       "id": "mrr",
       "name": "MRR",
-      "value": 4831,
+      "value": 4838,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        4720.42,
-        4715.61,
-        4723.92,
-        4728.9,
-        4737.1,
-        4746.67,
-        4749.65,
+        4715.62,
+        4723.93,
+        4728.91,
+        4737.11,
+        4746.68,
+        4749.66,
         4741.67,
-        4750.87,
-        4755.58,
-        4753.67,
-        4754.57,
-        4760.36,
+        4750.88,
+        4755.59,
+        4753.68,
+        4754.58,
+        4760.37,
         4759.43,
-        4759.5,
+        4759.51,
         4765.13,
-        4765.78,
-        4763.73,
-        4764.24,
-        4764.29,
-        4765.33,
-        4779.67,
+        4765.79,
+        4763.74,
+        4764.25,
+        4764.3,
+        4765.34,
+        4779.68,
         4781.72,
-        4800.46,
+        4800.47,
         4819.73,
-        4825.47,
-        4821.82,
-        4827.67
+        4825.48,
+        4821.83,
+        4827.68,
+        4835.9
       ]
     },
     {
       "id": "revenue",
       "name": "Revenue",
-      "value": 4504,
+      "value": 4543,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        48.08,
         110.06,
         89.43,
         229.79,
@@ -163,18 +162,18 @@
         267.2,
         68.17,
         181.43,
-        107.65
+        107.65,
+        170.17
       ]
     },
     {
       "id": "new_customers",
       "name": "New Customers",
-      "value": 2466,
+      "value": 2575,
       "unit": "#",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        1,
         3,
         4,
         7,
@@ -201,13 +200,14 @@
         13,
         4,
         4,
-        4
+        4,
+        8
       ]
     },
     {
       "id": "active_users",
       "name": "Active Users",
-      "value": 15275,
+      "value": 15674,
       "unit": "#",
       "period": "P28D",
       "delta": null,
@@ -216,11 +216,6 @@
   ],
   "series": {
     "revenue": [
-      {
-        "date": "2026-08-22",
-        "value": 48.08,
-        "incomplete": false
-      },
       {
         "date": "2026-08-23",
         "value": 110.06,
@@ -355,42 +350,42 @@
         "date": "2026-09-18",
         "value": 107.65,
         "incomplete": false
+      },
+      {
+        "date": "2026-09-19",
+        "value": 170.17,
+        "incomplete": false
       }
     ],
     "mrr": [
       {
-        "date": "2026-08-22",
-        "value": 4720.42,
-        "incomplete": false
-      },
-      {
         "date": "2026-08-23",
-        "value": 4715.61,
+        "value": 4715.62,
         "incomplete": false
       },
       {
         "date": "2026-08-24",
-        "value": 4723.92,
+        "value": 4723.93,
         "incomplete": false
       },
       {
         "date": "2026-08-25",
-        "value": 4728.9,
+        "value": 4728.91,
         "incomplete": false
       },
       {
         "date": "2026-08-26",
-        "value": 4737.1,
+        "value": 4737.11,
         "incomplete": false
       },
       {
         "date": "2026-08-27",
-        "value": 4746.67,
+        "value": 4746.68,
         "incomplete": false
       },
       {
         "date": "2026-08-28",
-        "value": 4749.65,
+        "value": 4749.66,
         "incomplete": false
       },
       {
@@ -400,27 +395,27 @@
       },
       {
         "date": "2026-08-30",
-        "value": 4750.87,
+        "value": 4750.88,
         "incomplete": false
       },
       {
         "date": "2026-08-31",
-        "value": 4755.58,
+        "value": 4755.59,
         "incomplete": false
       },
       {
         "date": "2026-09-01",
-        "value": 4753.67,
+        "value": 4753.68,
         "incomplete": false
       },
       {
         "date": "2026-09-02",
-        "value": 4754.57,
+        "value": 4754.58,
         "incomplete": false
       },
       {
         "date": "2026-09-03",
-        "value": 4760.36,
+        "value": 4760.37,
         "incomplete": false
       },
       {
@@ -430,7 +425,7 @@
       },
       {
         "date": "2026-09-05",
-        "value": 4759.5,
+        "value": 4759.51,
         "incomplete": false
       },
       {
@@ -440,32 +435,32 @@
       },
       {
         "date": "2026-09-07",
-        "value": 4765.78,
+        "value": 4765.79,
         "incomplete": false
       },
       {
         "date": "2026-09-08",
-        "value": 4763.73,
+        "value": 4763.74,
         "incomplete": false
       },
       {
         "date": "2026-09-09",
-        "value": 4764.24,
+        "value": 4764.25,
         "incomplete": false
       },
       {
         "date": "2026-09-10",
-        "value": 4764.29,
+        "value": 4764.3,
         "incomplete": false
       },
       {
         "date": "2026-09-11",
-        "value": 4765.33,
+        "value": 4765.34,
         "incomplete": false
       },
       {
         "date": "2026-09-12",
-        "value": 4779.67,
+        "value": 4779.68,
         "incomplete": false
       },
       {
@@ -475,7 +470,7 @@
       },
       {
         "date": "2026-09-14",
-        "value": 4800.46,
+        "value": 4800.47,
         "incomplete": false
       },
       {
@@ -485,26 +480,26 @@
       },
       {
         "date": "2026-09-16",
-        "value": 4825.47,
+        "value": 4825.48,
         "incomplete": false
       },
       {
         "date": "2026-09-17",
-        "value": 4821.82,
+        "value": 4821.83,
         "incomplete": false
       },
       {
         "date": "2026-09-18",
-        "value": 4827.67,
+        "value": 4827.68,
+        "incomplete": false
+      },
+      {
+        "date": "2026-09-19",
+        "value": 4835.9,
         "incomplete": false
       }
     ],
     "actives": [
-      {
-        "date": "2026-08-22",
-        "value": 2609,
-        "incomplete": false
-      },
       {
         "date": "2026-08-23",
         "value": 2607,
@@ -639,14 +634,14 @@
         "date": "2026-09-18",
         "value": 2648,
         "incomplete": false
+      },
+      {
+        "date": "2026-09-19",
+        "value": 2651,
+        "incomplete": false
       }
     ],
     "churn_rate": [
-      {
-        "date": "2026-08-22",
-        "value": 4,
-        "incomplete": false
-      },
       {
         "date": "2026-08-23",
         "value": 23,
@@ -781,16 +776,14 @@
         "date": "2026-09-18",
         "value": 11,
         "incomplete": false
+      },
+      {
+        "date": "2026-09-19",
+        "value": 19,
+        "incomplete": false
       }
     ],
     "mrr_movement": [
-      {
-        "date": "2026-08-22",
-        "New Actives": 1,
-        "Resubscription Actives": 0,
-        "Churned Actives": 1,
-        "Movement": 0
-      },
       {
         "date": "2026-08-23",
         "New Actives": 3,
@@ -979,15 +972,16 @@
         "Resubscription Actives": 0,
         "Churned Actives": 2,
         "Movement": 2
+      },
+      {
+        "date": "2026-09-19",
+        "New Actives": 8,
+        "Resubscription Actives": 0,
+        "Churned Actives": 5,
+        "Movement": 3
       }
     ],
     "trials_movement": [
-      {
-        "date": "2026-08-22",
-        "New Trials": 5,
-        "Expired Trials": 6,
-        "Movement": -1
-      },
       {
         "date": "2026-08-23",
         "New Trials": 8,
@@ -1149,21 +1143,27 @@
         "New Trials": 4,
         "Expired Trials": 4,
         "Movement": 0
+      },
+      {
+        "date": "2026-09-19",
+        "New Trials": 9,
+        "Expired Trials": 7,
+        "Movement": 2
       }
     ]
   },
   "subscription_movement": {
     "starting": 0,
-    "ending": 2649,
-    "new": 123,
+    "ending": 2650,
+    "new": 130,
     "reactivation": 14,
-    "churned": -98,
-    "movement": 39
+    "churned": -102,
+    "movement": 42
   },
   "trial_funnel": {
-    "active_users": 15275,
-    "new_trials_28d": 222,
-    "active_trials": 86,
+    "active_users": 15674,
+    "new_trials_28d": 226,
+    "active_trials": 89,
     "converted_estimated": 122
   },
   "incomplete_charts": [
@@ -1175,8 +1175,8 @@
     "churn"
   ],
   "all_time": {
-    "revenue": 4532.09,
-    "transactions": 381,
-    "earliest_date": "2026-08-22"
+    "revenue": 4608.89,
+    "transactions": 384,
+    "earliest_date": "2026-08-23"
   }
 }
