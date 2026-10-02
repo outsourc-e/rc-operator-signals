@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-01T12:44:25.044Z",
+  "generated_at": "2026-10-02T12:08:33.158Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-09-03",
-    "end": "2026-10-01"
+    "start": "2026-09-04",
+    "end": "2026-10-02"
   },
   "snapshot": [
     {
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2632
+      "value": 2633
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4822
+      "value": 4825
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 5652
+      "value": 5670
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1790839799627,
-      "last_updated_at_iso8601": "2026-10-01T07:29:59.627216+00:00",
+      "last_updated_at": 1790926199368,
+      "last_updated_at_iso8601": "2026-10-02T07:29:59.368520+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 3266
+      "value": 3308
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1790839799627,
-      "last_updated_at_iso8601": "2026-10-01T07:29:59.627216+00:00",
+      "last_updated_at": 1790926199368,
+      "last_updated_at_iso8601": "2026-10-02T07:29:59.368520+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 17291
+      "value": 17437
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 17.2%",
-      "detail": "28-day revenue ($5,652) is higher than MRR ($4,822). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 17.5%",
+      "detail": "28-day revenue ($5,670) is higher than MRR ($4,825). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5652,
+          "value": 5670,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4822,
+          "value": 4825,
           "period": "P28D"
         }
       ],
@@ -99,17 +99,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 124% of active subs in 28d",
-      "detail": "3,266 new customers arrived against a paid base of 2,632. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 126% of active subs in 28d",
+      "detail": "3,308 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 3266,
+          "value": 3308,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2632
+          "value": 2633
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -121,17 +121,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 124% of active subs in 28d",
-      "detail": "3,266 new customers arrived against a paid base of 2,632. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 126% of active subs in 28d",
+      "detail": "3,308 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 3266,
+          "value": 3308,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2632
+          "value": 2633
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
