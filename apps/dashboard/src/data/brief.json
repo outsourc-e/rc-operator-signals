@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-03T11:19:44.421Z",
+  "generated_at": "2026-10-04T12:00:20.321Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-09-05",
-    "end": "2026-10-03"
+    "start": "2026-09-06",
+    "end": "2026-10-04"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 44
+      "value": 41
     },
     {
       "description": "In total",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4824
+      "value": 4827
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 5864
+      "value": 5849
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1791012599600,
-      "last_updated_at_iso8601": "2026-10-03T07:29:59.600743+00:00",
+      "last_updated_at": 1791098999750,
+      "last_updated_at_iso8601": "2026-10-04T07:29:59.750708+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 3335
+      "value": 3339
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1791012599600,
-      "last_updated_at_iso8601": "2026-10-03T07:29:59.600743+00:00",
+      "last_updated_at": 1791098999750,
+      "last_updated_at_iso8601": "2026-10-04T07:29:59.750708+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 17524
+      "value": 17593
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "warning",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 21.6%",
-      "detail": "28-day revenue ($5,864) is higher than MRR ($4,824). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 21.2%",
+      "detail": "28-day revenue ($5,849) is higher than MRR ($4,827). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5864,
+          "value": 5849,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4824,
+          "value": 4827,
           "period": "P28D"
         }
       ],
@@ -100,11 +100,11 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 127% of active subs in 28d",
-      "detail": "3,335 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "3,339 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 3335,
+          "value": 3339,
           "period": "28d"
         },
         {
@@ -120,17 +120,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "warning",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 21.6%",
-      "detail": "28-day revenue ($5,864) is higher than MRR ($4,824). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 21.2%",
+      "detail": "28-day revenue ($5,849) is higher than MRR ($4,827). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5864,
+          "value": 5849,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4824,
+          "value": 4827,
           "period": "P28D"
         }
       ],
@@ -144,11 +144,11 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 127% of active subs in 28d",
-      "detail": "3,335 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "3,339 new customers arrived against a paid base of 2,633. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 3335,
+          "value": 3339,
           "period": "28d"
         },
         {
