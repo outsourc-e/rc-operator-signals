@@ -1,21 +1,21 @@
 # RevenueCat Operator Brief — Dark Noise
 
-> Period: 2026-09-17 → 2026-10-15
-> Generated: 2026-10-15T11:04:29.091Z
+> Period: 2026-09-18 → 2026-10-16
+> Generated: 2026-10-16T11:00:13.471Z
 
-Dark Noise operator brief — 28d: MRR $4,803, revenue $5,871. Top signal: Revenue exceeds MRR by 22.2%. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
+Dark Noise operator brief — 28d: MRR $4,794, revenue $5,945. Top signal: Revenue exceeds MRR by 24.0%. Next: audit what changed 3-4 weeks ago, since that is where the current trends were seeded.
 
 ## KPI snapshot
-- **Active Trials**: 30
-- **Active Subscriptions**: 2,613
-- **MRR**: $4,803
-- **Revenue**: $5,871
-- **New Customers**: 2,212
-- **Active Users**: 16,593
+- **Active Trials**: 29
+- **Active Subscriptions**: 2,611
+- **MRR**: $4,794
+- **Revenue**: $5,945
+- **New Customers**: 2,114
+- **Active Users**: 16,490
 
 ## Fired signals
-- **Revenue exceeds MRR by 22.2%**: 28-day revenue ($5,871) is higher than MRR ($4,803). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.
-- **New customers are 85% of active subs in 28d**: 2,212 new customers arrived against a paid base of 2,613. Growth is healthy, but conversion to paying may still be leaving money on the table.
+- **Revenue exceeds MRR by 24.0%**: 28-day revenue ($5,945) is higher than MRR ($4,794). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.
+- **New customers are 81% of active subs in 28d**: 2,114 new customers arrived against a paid base of 2,611. Growth is healthy, but conversion to paying may still be leaving money on the table.
 - **6 chart(s) have incomplete current-period data**: Charts with incomplete recent values: Revenue, MRR, Active Subscriptions, Active Subscriptions Movement, Active Trials Movement, Churn. The latest bucket is provisional.
 
 ## Caveats
