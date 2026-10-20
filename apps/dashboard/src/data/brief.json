@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-10-19T12:34:52.538Z",
+  "generated_at": "2026-10-20T11:09:22.332Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-09-21",
-    "end": "2026-10-19"
+    "start": "2026-09-22",
+    "end": "2026-10-20"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 27
+      "value": 30
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2601
+      "value": 2597
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4773
+      "value": 4768
     },
     {
       "description": "Last 28 days",
@@ -48,47 +48,47 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 5929
+      "value": 5571
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1792394999604,
-      "last_updated_at_iso8601": "2026-10-19T07:29:59.604589+00:00",
+      "last_updated_at": 1792481399445,
+      "last_updated_at_iso8601": "2026-10-20T07:29:59.445086+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1872
+      "value": 1841
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1792394999604,
-      "last_updated_at_iso8601": "2026-10-19T07:29:59.604589+00:00",
+      "last_updated_at": 1792481399445,
+      "last_updated_at_iso8601": "2026-10-20T07:29:59.445086+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 15942
+      "value": 15940
     }
   ],
   "signals": [
     {
       "id": "revenue_mrr_divergence",
-      "severity": "warning",
+      "severity": "info",
       "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 24.2%",
-      "detail": "28-day revenue ($5,929) is higher than MRR ($4,773). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
+      "title": "Revenue exceeds MRR by 16.8%",
+      "detail": "28-day revenue ($5,571) is higher than MRR ($4,768). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 5929,
+          "value": 5571,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4773,
+          "value": 4768,
           "period": "P28D"
         }
       ],
@@ -99,61 +99,39 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 72% of active subs in 28d",
-      "detail": "1,872 new customers arrived against a paid base of 2,601. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 71% of active subs in 28d",
+      "detail": "1,841 new customers arrived against a paid base of 2,597. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1872,
+          "value": 1841,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2601
+          "value": 2597
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
     }
   ],
-  "contradictions": [
-    {
-      "id": "revenue_mrr_divergence",
-      "severity": "warning",
-      "kind": "interpretation",
-      "title": "Revenue exceeds MRR by 24.2%",
-      "detail": "28-day revenue ($5,929) is higher than MRR ($4,773). That usually means one-time purchases or annual upfront recognition are inflating cash above the recurring base.",
-      "evidence": [
-        {
-          "metric": "revenue",
-          "value": 5929,
-          "period": "P28D"
-        },
-        {
-          "metric": "mrr",
-          "value": 4773,
-          "period": "P28D"
-        }
-      ],
-      "caveat": "Compare the gap across multiple periods before making a pricing call.",
-      "followup": "Segment Revenue by product or store to identify the non-recurring contributor."
-    }
-  ],
+  "contradictions": [],
   "watchlist": [
     {
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 72% of active subs in 28d",
-      "detail": "1,872 new customers arrived against a paid base of 2,601. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 71% of active subs in 28d",
+      "detail": "1,841 new customers arrived against a paid base of 2,597. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1872,
+          "value": 1841,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2601
+          "value": 2597
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
