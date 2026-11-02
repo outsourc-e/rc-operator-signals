@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-01T12:54:03.733Z",
+  "generated_at": "2026-11-02T15:06:59.280Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-10-04",
-    "end": "2026-11-01"
+    "start": "2026-10-05",
+    "end": "2026-11-02"
   },
   "snapshot": [
     {
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2574
+      "value": 2572
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4729
+      "value": 4722
     },
     {
       "description": "Last 28 days",
@@ -48,29 +48,29 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4312
+      "value": 4267
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1793518199241,
-      "last_updated_at_iso8601": "2026-11-01T07:29:59.241677+00:00",
+      "last_updated_at": 1793618999838,
+      "last_updated_at_iso8601": "2026-11-02T11:29:59.838347+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 1824
+      "value": 1804
     },
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1793518199241,
-      "last_updated_at_iso8601": "2026-11-01T07:29:59.241677+00:00",
+      "last_updated_at": 1793618999838,
+      "last_updated_at_iso8601": "2026-11-02T11:29:59.838347+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
       "unit": "#",
-      "value": 16641
+      "value": 16691
     }
   ],
   "signals": [
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "MRR exceeds Revenue by 8.8%",
-      "detail": "MRR ($4,729) exceeds 28-day revenue ($4,312). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
+      "title": "MRR exceeds Revenue by 9.6%",
+      "detail": "MRR ($4,722) exceeds 28-day revenue ($4,267). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4312,
+          "value": 4267,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4729,
+          "value": 4722,
           "period": "P28D"
         }
       ],
@@ -99,17 +99,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 71% of active subs in 28d",
-      "detail": "1,824 new customers arrived against a paid base of 2,574. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 70% of active subs in 28d",
+      "detail": "1,804 new customers arrived against a paid base of 2,572. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1824,
+          "value": 1804,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2574
+          "value": 2572
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -121,17 +121,17 @@
       "id": "acquisition_outpacing_monetization",
       "severity": "info",
       "kind": "question",
-      "title": "New customers are 71% of active subs in 28d",
-      "detail": "1,824 new customers arrived against a paid base of 2,574. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "title": "New customers are 70% of active subs in 28d",
+      "detail": "1,804 new customers arrived against a paid base of 2,572. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
-          "value": 1824,
+          "value": 1804,
           "period": "28d"
         },
         {
           "metric": "active_subscriptions",
-          "value": 2574
+          "value": 2572
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
