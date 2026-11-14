@@ -1,9 +1,9 @@
 {
-  "generated_at": "2026-11-13T14:13:10.498Z",
+  "generated_at": "2026-11-14T13:12:30.657Z",
   "project_name": "Dark Noise",
   "period": {
-    "start": "2026-10-16",
-    "end": "2026-11-13"
+    "start": "2026-10-17",
+    "end": "2026-11-14"
   },
   "snapshot": [
     {
@@ -15,7 +15,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 27
+      "value": 26
     },
     {
       "description": "In total",
@@ -26,7 +26,7 @@
       "object": "overview_metric",
       "period": "P0D",
       "unit": "#",
-      "value": 2559
+      "value": 2558
     },
     {
       "description": "Monthly Recurring Revenue",
@@ -37,7 +37,7 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4723
+      "value": 4719
     },
     {
       "description": "Last 28 days",
@@ -48,13 +48,13 @@
       "object": "overview_metric",
       "period": "P28D",
       "unit": "$",
-      "value": 4354
+      "value": 4384
     },
     {
       "description": "Last 28 days",
       "id": "new_customers",
-      "last_updated_at": 1794569399814,
-      "last_updated_at_iso8601": "2026-11-13T11:29:59.814196+00:00",
+      "last_updated_at": 1794641399505,
+      "last_updated_at_iso8601": "2026-11-14T07:29:59.505549+00:00",
       "name": "New Customers",
       "object": "overview_metric",
       "period": "P28D",
@@ -64,8 +64,8 @@
     {
       "description": "Last 28 days",
       "id": "active_users",
-      "last_updated_at": 1794569399814,
-      "last_updated_at_iso8601": "2026-11-13T11:29:59.814196+00:00",
+      "last_updated_at": 1794641399505,
+      "last_updated_at_iso8601": "2026-11-14T07:29:59.505549+00:00",
       "name": "Active Users",
       "object": "overview_metric",
       "period": "P28D",
@@ -78,17 +78,17 @@
       "id": "revenue_mrr_divergence",
       "severity": "info",
       "kind": "interpretation",
-      "title": "MRR exceeds Revenue by 7.8%",
-      "detail": "MRR ($4,723) exceeds 28-day revenue ($4,354). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
+      "title": "MRR exceeds Revenue by 7.1%",
+      "detail": "MRR ($4,719) exceeds 28-day revenue ($4,384). Refunds, churn, or collection timing may be depressing cash below the run-rate.",
       "evidence": [
         {
           "metric": "revenue",
-          "value": 4354,
+          "value": 4384,
           "period": "P28D"
         },
         {
           "metric": "mrr",
-          "value": 4723,
+          "value": 4719,
           "period": "P28D"
         }
       ],
@@ -100,7 +100,7 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 71% of active subs in 28d",
-      "detail": "1,805 new customers arrived against a paid base of 2,559. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,805 new customers arrived against a paid base of 2,558. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
@@ -109,7 +109,7 @@
         },
         {
           "metric": "active_subscriptions",
-          "value": 2559
+          "value": 2558
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
@@ -122,7 +122,7 @@
       "severity": "info",
       "kind": "question",
       "title": "New customers are 71% of active subs in 28d",
-      "detail": "1,805 new customers arrived against a paid base of 2,559. Growth is healthy, but conversion to paying may still be leaving money on the table.",
+      "detail": "1,805 new customers arrived against a paid base of 2,558. Growth is healthy, but conversion to paying may still be leaving money on the table.",
       "evidence": [
         {
           "metric": "new_customers",
@@ -131,7 +131,7 @@
         },
         {
           "metric": "active_subscriptions",
-          "value": 2559
+          "value": 2558
         }
       ],
       "followup": "Check Conversion to Paying for the same window."
