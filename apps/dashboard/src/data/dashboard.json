@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-11-26T16:36:46.473Z",
+  "generated_at": "2026-11-27T16:22:03.349Z",
   "data_mode": "live",
   "project": {
     "id": "proj058a6330",
@@ -7,22 +7,21 @@
     "stores": "App Store · Play Store"
   },
   "period": {
-    "end": "2026-11-26",
-    "start": "2026-10-29",
+    "end": "2026-11-27",
+    "start": "2026-10-30",
     "days": 28,
-    "prior_end": "2026-10-29",
-    "prior_start": "2026-10-01"
+    "prior_end": "2026-10-30",
+    "prior_start": "2026-10-02"
   },
   "kpis": [
     {
       "id": "active_trials",
       "name": "Active Trials",
-      "value": 42,
+      "value": 38,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        9,
         4,
         2,
         6,
@@ -49,18 +48,18 @@
         7,
         5,
         6,
-        0
+        0,
+        6
       ]
     },
     {
       "id": "active_subscriptions",
       "name": "Active Subscriptions",
-      "value": 2526,
+      "value": 2515,
       "unit": "#",
       "period": "P0D",
       "delta": null,
       "sparkline": [
-        2579,
         2576,
         2576,
         2571,
@@ -87,18 +86,18 @@
         2540,
         2538,
         2533,
-        2530
+        2530,
+        2522
       ]
     },
     {
       "id": "mrr",
       "name": "MRR",
-      "value": 4677.23,
+      "value": 4667.9,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        4736.39,
         4731.08,
         4733.25,
         4719.65,
@@ -125,18 +124,18 @@
         4686.3,
         4684.63,
         4678.12,
-        4681.35
+        4681.35,
+        4673.48
       ]
     },
     {
       "id": "revenue",
       "name": "Revenue",
-      "value": 4406.67,
+      "value": 4548.64,
       "unit": "$",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        110.85,
         66.53,
         83.61,
         50.91,
@@ -163,18 +162,18 @@
         135.58,
         197.85,
         72.86,
-        243.73
+        243.73,
+        200.79
       ]
     },
     {
       "id": "new_customers",
       "name": "New Customers",
-      "value": 1625,
+      "value": 1595,
       "unit": "#",
       "period": "P28D",
       "delta": null,
       "sparkline": [
-        4,
         1,
         2,
         1,
@@ -201,7 +200,8 @@
         5,
         1,
         2,
-        4
+        4,
+        2
       ]
     },
     {
@@ -216,11 +216,6 @@
   ],
   "series": {
     "revenue": [
-      {
-        "date": "2026-10-29",
-        "value": 110.85,
-        "incomplete": false
-      },
       {
         "date": "2026-10-30",
         "value": 66.53,
@@ -355,14 +350,14 @@
         "date": "2026-11-25",
         "value": 243.73,
         "incomplete": false
+      },
+      {
+        "date": "2026-11-26",
+        "value": 200.79,
+        "incomplete": false
       }
     ],
     "mrr": [
-      {
-        "date": "2026-10-29",
-        "value": 4736.39,
-        "incomplete": false
-      },
       {
         "date": "2026-10-30",
         "value": 4731.08,
@@ -497,14 +492,14 @@
         "date": "2026-11-25",
         "value": 4681.35,
         "incomplete": false
+      },
+      {
+        "date": "2026-11-26",
+        "value": 4673.48,
+        "incomplete": false
       }
     ],
     "actives": [
-      {
-        "date": "2026-10-29",
-        "value": 2579,
-        "incomplete": false
-      },
       {
         "date": "2026-10-30",
         "value": 2576,
@@ -639,355 +634,382 @@
         "date": "2026-11-25",
         "value": 2530,
         "incomplete": false
+      },
+      {
+        "date": "2026-11-26",
+        "value": 2522,
+        "incomplete": false
       }
     ],
     "churn_rate": [
       {
-        "date": "2026-10-29",
-        "value": 16,
-        "incomplete": false
-      },
-      {
         "date": "2026-10-30",
-        "value": 19,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-10-31",
-        "value": 12,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-01",
-        "value": 23,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-11-02",
-        "value": 12,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-03",
-        "value": 27,
+        "value": 700,
         "incomplete": false
       },
       {
         "date": "2026-11-04",
-        "value": 12,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-05",
-        "value": 39,
+        "value": 1000,
         "incomplete": false
       },
       {
         "date": "2026-11-06",
-        "value": 16,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-07",
-        "value": 19,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-08",
-        "value": 43,
+        "value": 1000,
         "incomplete": false
       },
       {
         "date": "2026-11-09",
-        "value": 23,
+        "value": 600,
         "incomplete": false
       },
       {
         "date": "2026-11-10",
-        "value": 39,
+        "value": 900,
         "incomplete": false
       },
       {
         "date": "2026-11-11",
-        "value": 16,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-11-12",
-        "value": 16,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-11-13",
-        "value": 16,
+        "value": 400,
         "incomplete": false
       },
       {
         "date": "2026-11-14",
-        "value": 8,
+        "value": 200,
         "incomplete": false
       },
       {
         "date": "2026-11-15",
-        "value": 23,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-11-16",
-        "value": 27,
+        "value": 600,
         "incomplete": false
       },
       {
         "date": "2026-11-17",
-        "value": 16,
+        "value": 400,
         "incomplete": false
       },
       {
         "date": "2026-11-18",
-        "value": 16,
+        "value": 400,
         "incomplete": false
       },
       {
         "date": "2026-11-19",
-        "value": 27,
+        "value": 700,
         "incomplete": false
       },
       {
         "date": "2026-11-20",
-        "value": 24,
+        "value": 500,
         "incomplete": false
       },
       {
         "date": "2026-11-21",
-        "value": 24,
+        "value": 600,
         "incomplete": false
       },
       {
         "date": "2026-11-22",
-        "value": 31,
+        "value": 800,
         "incomplete": false
       },
       {
         "date": "2026-11-23",
-        "value": 12,
+        "value": 300,
         "incomplete": false
       },
       {
         "date": "2026-11-24",
-        "value": 32,
+        "value": 800,
         "incomplete": false
       },
       {
         "date": "2026-11-25",
-        "value": 32,
+        "value": 800,
+        "incomplete": false
+      },
+      {
+        "date": "2026-11-26",
+        "value": 1100,
         "incomplete": false
       }
     ],
     "mrr_movement": [
       {
-        "date": "2026-10-29",
-        "New Actives": 4,
-        "Resubscription Actives": 1,
-        "Churned Actives": 4,
-        "Movement": 1
-      },
-      {
         "date": "2026-10-30",
         "New Actives": 1,
         "Resubscription Actives": 1,
-        "Churned Actives": 5,
+        "Voluntary Churned Actives": 5,
+        "Involuntary Churned Actives": 0,
         "Movement": -3
       },
       {
         "date": "2026-10-31",
         "New Actives": 2,
         "Resubscription Actives": 1,
-        "Churned Actives": 3,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 0,
         "Movement": 0
       },
       {
         "date": "2026-11-01",
         "New Actives": 1,
         "Resubscription Actives": 0,
-        "Churned Actives": 6,
+        "Voluntary Churned Actives": 5,
+        "Involuntary Churned Actives": 1,
         "Movement": -5
       },
       {
         "date": "2026-11-02",
         "New Actives": 6,
         "Resubscription Actives": 0,
-        "Churned Actives": 3,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 0,
         "Movement": 3
       },
       {
         "date": "2026-11-03",
         "New Actives": 6,
         "Resubscription Actives": 1,
-        "Churned Actives": 7,
+        "Voluntary Churned Actives": 7,
+        "Involuntary Churned Actives": 0,
         "Movement": 0
       },
       {
         "date": "2026-11-04",
         "New Actives": 6,
         "Resubscription Actives": 0,
-        "Churned Actives": 3,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 0,
         "Movement": 3
       },
       {
         "date": "2026-11-05",
         "New Actives": 3,
         "Resubscription Actives": 1,
-        "Churned Actives": 10,
+        "Voluntary Churned Actives": 10,
+        "Involuntary Churned Actives": 0,
         "Movement": -6
       },
       {
         "date": "2026-11-06",
         "New Actives": 4,
         "Resubscription Actives": 1,
-        "Churned Actives": 4,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 1,
         "Movement": 1
       },
       {
         "date": "2026-11-07",
         "New Actives": 0,
         "Resubscription Actives": 1,
-        "Churned Actives": 5,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 2,
         "Movement": -4
       },
       {
         "date": "2026-11-08",
         "New Actives": 4,
         "Resubscription Actives": 0,
-        "Churned Actives": 11,
+        "Voluntary Churned Actives": 10,
+        "Involuntary Churned Actives": 1,
         "Movement": -7
       },
       {
         "date": "2026-11-09",
         "New Actives": 5,
         "Resubscription Actives": 0,
-        "Churned Actives": 6,
+        "Voluntary Churned Actives": 6,
+        "Involuntary Churned Actives": 0,
         "Movement": -1
       },
       {
         "date": "2026-11-10",
         "New Actives": 6,
         "Resubscription Actives": 0,
-        "Churned Actives": 10,
+        "Voluntary Churned Actives": 9,
+        "Involuntary Churned Actives": 1,
         "Movement": -4
       },
       {
         "date": "2026-11-11",
         "New Actives": 1,
         "Resubscription Actives": 2,
-        "Churned Actives": 4,
+        "Voluntary Churned Actives": 5,
+        "Involuntary Churned Actives": -1,
         "Movement": -1
       },
       {
         "date": "2026-11-12",
         "New Actives": 6,
         "Resubscription Actives": 0,
-        "Churned Actives": 3,
+        "Voluntary Churned Actives": 4,
+        "Involuntary Churned Actives": -1,
         "Movement": 3
       },
       {
         "date": "2026-11-13",
         "New Actives": 4,
         "Resubscription Actives": 1,
-        "Churned Actives": 4,
+        "Voluntary Churned Actives": 4,
+        "Involuntary Churned Actives": 0,
         "Movement": 1
       },
       {
         "date": "2026-11-14",
         "New Actives": 2,
         "Resubscription Actives": 0,
-        "Churned Actives": 2,
+        "Voluntary Churned Actives": 2,
+        "Involuntary Churned Actives": 0,
         "Movement": 0
       },
       {
         "date": "2026-11-15",
         "New Actives": 3,
         "Resubscription Actives": 0,
-        "Churned Actives": 6,
+        "Voluntary Churned Actives": 5,
+        "Involuntary Churned Actives": 1,
         "Movement": -3
       },
       {
         "date": "2026-11-16",
         "New Actives": 2,
         "Resubscription Actives": 1,
-        "Churned Actives": 7,
+        "Voluntary Churned Actives": 6,
+        "Involuntary Churned Actives": 1,
         "Movement": -4
       },
       {
         "date": "2026-11-17",
         "New Actives": 6,
         "Resubscription Actives": 1,
-        "Churned Actives": 4,
+        "Voluntary Churned Actives": 4,
+        "Involuntary Churned Actives": 0,
         "Movement": 3
       },
       {
         "date": "2026-11-18",
         "New Actives": 1,
         "Resubscription Actives": 1,
-        "Churned Actives": 4,
+        "Voluntary Churned Actives": 4,
+        "Involuntary Churned Actives": 0,
         "Movement": -2
       },
       {
         "date": "2026-11-19",
         "New Actives": 2,
         "Resubscription Actives": 1,
-        "Churned Actives": 7,
+        "Voluntary Churned Actives": 7,
+        "Involuntary Churned Actives": 0,
         "Movement": -4
       },
       {
         "date": "2026-11-20",
         "New Actives": 2,
         "Resubscription Actives": 0,
-        "Churned Actives": 6,
+        "Voluntary Churned Actives": 5,
+        "Involuntary Churned Actives": 1,
         "Movement": -4
       },
       {
         "date": "2026-11-21",
         "New Actives": 4,
         "Resubscription Actives": 0,
-        "Churned Actives": 6,
+        "Voluntary Churned Actives": 6,
+        "Involuntary Churned Actives": 0,
         "Movement": -2
       },
       {
         "date": "2026-11-22",
         "New Actives": 5,
         "Resubscription Actives": 0,
-        "Churned Actives": 8,
+        "Voluntary Churned Actives": 8,
+        "Involuntary Churned Actives": 0,
         "Movement": -3
       },
       {
         "date": "2026-11-23",
         "New Actives": 1,
         "Resubscription Actives": 0,
-        "Churned Actives": 3,
+        "Voluntary Churned Actives": 3,
+        "Involuntary Churned Actives": 0,
         "Movement": -2
       },
       {
         "date": "2026-11-24",
         "New Actives": 2,
         "Resubscription Actives": 0,
-        "Churned Actives": 7,
+        "Voluntary Churned Actives": 7,
+        "Involuntary Churned Actives": 0,
         "Movement": -5
       },
       {
         "date": "2026-11-25",
         "New Actives": 4,
         "Resubscription Actives": 1,
-        "Churned Actives": 8,
+        "Voluntary Churned Actives": 8,
+        "Involuntary Churned Actives": 0,
         "Movement": -3
+      },
+      {
+        "date": "2026-11-26",
+        "New Actives": 2,
+        "Resubscription Actives": 1,
+        "Voluntary Churned Actives": 11,
+        "Involuntary Churned Actives": 0,
+        "Movement": -8
       }
     ],
     "trials_movement": [
-      {
-        "date": "2026-10-29",
-        "New Trials": 9,
-        "Expired Trials": 11,
-        "Movement": -2
-      },
       {
         "date": "2026-10-30",
         "New Trials": 4,
@@ -1149,22 +1171,28 @@
         "New Trials": 0,
         "Expired Trials": 6,
         "Movement": -6
+      },
+      {
+        "date": "2026-11-26",
+        "New Trials": 6,
+        "Expired Trials": 5,
+        "Movement": 1
       }
     ]
   },
   "subscription_movement": {
     "starting": 0,
-    "ending": 2526,
-    "new": 93,
+    "ending": 2515,
+    "new": 91,
     "reactivation": 15,
     "churned": -156,
-    "movement": -48
+    "movement": 7
   },
   "trial_funnel": {
     "active_users": 16635,
-    "new_trials_28d": 135,
-    "active_trials": 42,
-    "converted_estimated": 93
+    "new_trials_28d": 132,
+    "active_trials": 38,
+    "converted_estimated": 89
   },
   "incomplete_charts": [
     "revenue",
@@ -1175,8 +1203,8 @@
     "churn"
   ],
   "all_time": {
-    "revenue": 4480.6,
-    "transactions": 394,
-    "earliest_date": "2026-10-29"
+    "revenue": 4561.83,
+    "transactions": 396,
+    "earliest_date": "2026-10-30"
   }
 }
